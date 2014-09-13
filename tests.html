@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Chrome Text Customize test case</title>
+        <meta charset="utf-8">
+        <script src="1.0/text_customizer.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function hashCode(s) {
+                // Credits to http://stackoverflow.com/a/15710692
+                return s.split("").reduce(function(a,b){
+                    a = ((a<<5)-a)+b.charCodeAt(0);
+                    return a&a;
+                },0);
+            }
+
+            function test01(elem) {
+                var patterns = ['Caracas', 'ville', 'visage'];
+                var replacements = ['Maracas', 'pomme de pin', ''];
+                findText(elem, patterns, replacements);
+                return hashCode(elem.innerHTML) === -490366530;
+            }
+
+            function test02(elem) {
+                var patterns = [/\w+/i];
+                var replacements = ['Hello world'];
+                findText(elem, patterns, replacements);
+                return hashCode(elem.innerHTML) === -1157136757;
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var body = document.getElementsByTagName('body')[0];
+                var initial_body = body.cloneNode(true);
+                var tests = [test01, test02];
+                var all_ok = true;
+                var messages = [];
+
+                for (var i=0; i<tests.length; i++) {
+                    if (! tests[i](body)) {
+                        all_ok = false;
+                        messages.push('Test #'+i+' failed');
+                    }
+                    body.parentNode.replaceChild(initial_body, body);
+                    body = document.getElementsByTagName('body')[0];
+                }
+
+                var html_message = '';
+                if (messages.length !== 0) {
+                    html_message = messages.join('<p></p>');
+                    html_message = '<p>'+html_message+'</p>';
+                }
+                if (all_ok) html_message = '<h1>All tests passed</h1>'+html_message;
+                else html_message = '<h1>Fail</h1>'+html_message;
+                body.innerHTML = html_message;
+
+            }, false);
+        </script>
+    </head>
+
+    <body class="not-front logged-in page-node node-type-article no-sidebars not-une first-page font-size-1">
+        <div class="tool-bar clear-block">
+            <div class="bust">
+                <div class="tool-bar-bust">
+                    <ul class="tool-bar-links accur8-hidden-desktop">
+                        <li class="first"><a href="/mediapart-sur-mobile" title="Téléchargez nos applications"><span class="ico ico_app" data-icon="5" aria-hidden="true"></span></a></li>
+                        <li class="fractal-tablet fractal-mobile"><a href="/parrainage"><span class="ico ico_app" data-icon="8" aria-hidden="true"></span></a></li>
+                        <li class="last search-mobile"><a class="search-Link" id="searchFormLink" href="#searchFormEl" title="Rechercher"><span class="ico" data-icon="E"  aria-hidden="true"></span></a></li>
+                    </ul>
+                    <form action="http://www.mediapart.fr/search/apachesolr_search"  accept-charset="UTF-8" method="post" id="searchFormEl" class="search-form accur8-hidden-tablet accur8-hidden-mobile">
+                        <div>
+                            <div class="form-item">
+                                <label>Rechercher : </label><input type="hidden" name="apachesolr_search[queryvalues]" id="edit-apachesolr-search-queryvalues" value="[]"  /><input type="hidden" name="apachesolr_search[get]" id="edit-apachesolr-search-get" value="[]"  />
+                                <div class="container-inline">
+                                    <div class="form-item" id="edit-keys-wrapper"><input type="text" maxlength="255" name="keys" id="edit-keys" size="25" value="" class="form-text" /></div>
+                                    <input type="submit" name="op" id="edit-submit" value="ok"  title="Rechercher" class="form-submit" />
+                                </div>
+                            </div>
+                            <input type="hidden" name="form_build_id" id="form-5399f4fb74edc35592af185a13152df7" value="form-5399f4fb74edc35592af185a13152df7"  /><input type="hidden" name="form_token" id="edit-search-form-form-token" value="fb0ce5bc82d65b4f1a69b45dd674abe5"  /><input type="hidden" name="form_id" id="edit-search-form" value="search_form"  />
+                        </div>
+                    </form>
+                    <p class="link link-par accur8-hidden-tablet accur8-hidden-mobile"><a href="http://www.mediapart.fr/parrainage">Parrainage</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="bust">
+            <div class="header-region clear-block">
+                <a href="/">
+                    <img src="http://static.mediapart.fr/sites/all/themes/mediapart/mediapart_v5/images/logo-crieur.svg" alt="" title=""  class="title-logo" data-fallback="http://static.mediapart.fr/sites/all/themes/mediapart/mediapart_v5/images/logo-crieur.png" width="125" height="73" />    
+                    <div class="title-logo-text">
+                        <div class="brand">
+                            <img src="http://static.mediapart.fr/sites/all/themes/mediapart/mediapart_v5/images/brand.svg" alt="Mediapart" title=""  class="mdp-logo-text" data-fallback="http://static.mediapart.fr/sites/all/themes/mediapart/mediapart_v5/images/brand.png" width="260" height="36" />      
+                        </div>
+                        <div class="txt-header">
+                            <span class="title-date"><span class="long">Sam.13 septembre 2014</span><span class="short">13/09/2014</span></span>
+                            <span class="separateur">&ndash;</span>
+                            <span class="title-edition-of">Édition du matin</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="social-links">
+                    <ul class="links">
+                        <li class="0 first"><a href="http://www.mediapart.fr/articles/feed" target="_blank">RSS</a></li>
+                        <li class="1"><a href="http://twitter.com/mediapart" target="_blank">Twitter</a></li>
+                        <li class="2"><a href="http://www.facebook.com/pages/Mediapart/116070051527" target="_blank">Facebook</a></li>
+                        <li class="3"><a href="http://www.mediapart.fr/mediapart-sur-mobile" target="_self">Applications</a></li>
+                        <li class="4 last"><a href="https://www.frenchleaks.fr/" target="_blank">French Leaks</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="js-nav-journal nav bust accur8-desktop accur8-tablet accur8-mobile">
+            <div class="menu-journal main-menu fractal-desktop fractal-10-desktop collapse-7-desktop fractal-tablet fractal-6-tablet collapse-4-tablet fractal-mobile fractal-3-mobile collapse-2-mobile">
+                <a class="link-menu accur8-hidden-desktop" href="/">Menu du journal <span class="ico" data-icon="-"></span></a>
+                <div class="accur8-hidden-tablet accur8-hidden-mobile">
+                    <div class="item-list">
+                        <ul>
+                            <li class="home first"><a href="http://www.mediapart.fr">Le journal</a></li>
+                            <li class="inter"><a href="http://www.mediapart.fr/journal/international">International</a></li>
+                            <li class="france"><a href="http://www.mediapart.fr/journal/france">France</a></li>
+                            <li class="eco"><a href="http://www.mediapart.fr/journal/economie">Économie</a></li>
+                            <li class="cult"><a href="http://www.mediapart.fr/journal/culture-idees">Culture</a></li>
+                            <li class="en"><a href="http://www.mediapart.fr/en/english">English</a></li>
+                            <li class="es last"><a href="http://www.mediapart.fr/es/espanol">Español</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-club second-menu fractal-desktop rest-desktop fractal-tablet rest-tablet fractal-mobile rest-mobile">
+                <div class="item-list">
+                    <ul>
+                        <li class="first"><a href="http://blogs.mediapart.fr/">Le club</a></li>
+                        <li class="accur8-hidden-tablet accur8-hidden-mobile last"><a href="http://blogs.mediapart.fr/edition/decouvrir-mediapart">Participez</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bust">
+            <div class="sub-header accur8-desktop accur8-tablet">
+                <div class="col-left fractal-desktop fractal-10-desktop collapse-7-desktop fractal-tablet fractal-6-tablet collapse-4-tablet">
+                    <div class="taxonomy-teaser">
+                        <div class="item-list">
+                            <ul class="links">
+                                <li class="first"><a href="http://www.mediapart.fr/journal/international/dossier/notre-dossier-hugo-chavez-et-le-chavisme">Notre dossier&nbsp;: Hugo Chávez et le chavisme</a></li>
+                                <li class="last"><a href="http://www.mediapart.fr/journal/type-darticles/enquete">Enquête</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h1 class="h2 title">Caracas&nbsp;: la ville aux deux visages</h1>
+                    <p class="author under-title">
+                        <span class="article-date">21 mars 2014</span> |&nbsp;
+                        Par <span class="journalist">Jean-Baptiste Mouttet</span>
+                    </p>
+                    <div class="clear-block chapo">
+                        <div class="clear-block">
+                            <p><br>La capitale est &agrave; l'image du pays&nbsp;: double, divis&eacute;e. Un an apr&egrave;s la mort de Hugo Chavez, alors que les mouvements &eacute;tudiants se poursuivent, deux perceptions des &eacute;v&eacute;nements s'&eacute;crivent. Travers&eacute;e de la ville d'ouest en est, d'une Caracas chaviste aux quartiers ais&eacute;s sous les gaz lacrymog&egrave;nes.&nbsp;<i>De notre envoy&eacute; sp&eacute;cial &agrave; Caracas.</i></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="p-boite-outils accur8-hidden-desktop accur8-hidden-tablet">
+                    <a href="#menuOutilsTopEl" class="accur8-hidden-desktop menuOutilsLink" id="menuOutilsTopLink">
+                    Partage <span aria-hidden="true" data-icon="-" class="ico"></span>
+                    </a>
+                </p>
+                <div class="menuOutils menuOutilsTop col-right aside-region fractal-desktop fractal-10-desktop collapse-3-desktop fractal-tablet fractal-6-tablet collapse-2-tablet accur8-hidden-mobile " id="menuOutilsTopEl">
+                    <div class="menu-tools">
+                        <div class="item-list">
+                            <ul>
+                                <li class="first"><a href="/bookmark/add/392802"><span aria-hidden="true" data-icon="H" class="ico"></span><span class="txt">Favori</span></a></li>
+                                <li><a href="/vote/node/392802"><span aria-hidden="true" data-icon="%" class="ico"></span><span class="txt">Recommander</span></a></li>
+                                <li><a href="/print/392802"><span aria-hidden="true" data-icon="," class="ico"></span><span class="txt">Imprimer</span></a></li>
+                                <li class="last"><a href="/pdf/392802"><span aria-hidden="true" data-icon="B" class="ico"></span><span class="txt">Article en PDF</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu-share">
+                        <div class="item-list">
+                            <ul>
+                                <li class="fb-like fb_edge_widget_with_comment fb_iframe_widget first" data-href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?onglet=full" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial" data-action="recommend"></li>
+                                <li class="twitter-like"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?onglet=full" data-text="Caracas : la ville aux deux visages" data-via="Mediapart" data-lang="fr">Tweeter</a></li>
+                                <li>
+                                    <div class="g-plusone" data-size="medium" data-href="http%3A%2F%2Fwww.mediapart.fr%2Fjournal%2Finternational%2F210314%2Fcaracas-la-ville-aux-deux-visages%3Fonglet%3Dfull"></div>
+                                </li>
+                                <li class="offer last"><a href="/offrir_article/392802"><span aria-hidden="true" data-icon="$" class="ico"></span><span class="txt">Offrir l'article</span></a></li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">
+                            <!--//--><![CDATA[//><!--
+                                (function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s); js.id = id;
+                                js.src = '//connect.facebook.net/fr_FR/all.js#xfbml=1';
+                                fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));
+                                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');
+                                window.___gcfg = {lang: 'fr'};
+                                  (function() {
+                                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                  po.src = 'https://apis.google.com/js/plusone.js';
+                                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                  })();
+                                  //--><!]]>
+                        </script>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bust">
+            <div class="menu-article menu-article-top pager_top">
+                <div class="item-list">
+                    <ul>
+                        <li class="lien-article first"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages" class="active">Enquête</a></li>
+                        <li class="nav-page">
+                            <div class="item-list">
+                                <ul class="pager">
+                                    <li class="pager-item first"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?page_article=1" title="Caracas : la ville aux deux visages" class="active">1</a></li>
+                                    <li class="pager-item"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?page_article=2" title="Dans le centre : « Ici, c&#039;est pas l&#039;Ukraine »" class="active">2</a></li>
+                                    <li class="pager-item last"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?page_article=3" title="La nuit tombe sur la violence" class="active">3</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-connexe last">
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first"><span><span class="lect">lecture</span> <span class="sur">sur</span> une page</span></li>
+                                    <li class="comments-link last"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?onglet=commentaires" class="active"><span aria-hidden="true" data-icon="I" class="ico"></span><span class="txt">59&nbsp;Commentaires</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-content bust">
+            <div class="accur8-desktop accur8-tablet accurWidth" id="pageFirstContent">
+                <div class="col-left content-journal fractal-desktop fractal-10-desktop collapse-7-desktop fractal-tablet fractal-6-tablet collapse-4-tablet">
+                    <div class="content-article ">
+                        <p><b><span><span><span><i>De notre envoy&eacute; sp&eacute;cial &agrave; Caracas.</i></span></span></span></b></p>
+                        <p>Des maisons de briques ocre, les unes sur les autres, entrem&ecirc;l&eacute;es, glissent le long des pentes de la montagne El Avila vers le centre de Caracas. Ce sont les quartiers populaires, les &laquo;&nbsp;<i>barrios</i>&nbsp;&raquo; de l'ouest qui accueillent le voyageur venant de l'a&eacute;roport de Maiquetia, au bord de la mer Cara&iuml;be, &agrave; une heure de route environ de l&agrave;. La montagne s'est referm&eacute;e derri&egrave;re lui. La mer n'est plus qu'un lointain souvenir. Ce lundi matin, en cette p&eacute;riode de carnaval et de manifestations &eacute;tudiantes, la circulation est bien moins dense que d'habitude. Les interminables bouchons qui rongent la patience des chauffeurs ont pratiquement disparu. Le nouvel arrivant per&ccedil;oit &agrave; l'est les hautes tours vitr&eacute;es du centre-ville, devine au-del&agrave; les quartiers ais&eacute;s. L'ouest et l'est sont synonymes pour les <i>&laquo;&nbsp;caraquenos&nbsp;&raquo;</i> de pauvre et riche, chavistes et opposants. Et tant pis s'ils prennent des libert&eacute;s avec la r&eacute;alit&eacute;&nbsp;: Petare, un des plus grands &laquo;&nbsp;<i>barrios</i>&nbsp;&raquo; d'Am&eacute;rique latine, est par exemple &agrave; l'est.
+                        <div class="media media-align-center media-image format-100-pcent format-770_pixels"><img src="http://static.mediapart.fr/files/imagecache/770_pixels/media_71254/_Chavez_vit_la_lutte_continue__peut-on_lire_sur_ce_mur.jpg" alt="&laquo;&nbsp;Chavez vit, la lutte continue&nbsp;&raquo;, peut-on lire sur ce mur." title="&laquo;&nbsp;Chavez vit, la lutte continue&nbsp;&raquo;, peut-on lire sur ce mur." width="770" height="514"><span class="legend">&laquo;&nbsp;Chavez vit, la lutte continue&nbsp;&raquo;, peut-on lire sur ce mur. <span class="copyright">&copy; JBM</span></span></div></span></span></span></p>
+                        <p><span><span><span>Les &laquo;&nbsp;<i>barrios</i>&nbsp;&raquo; sont visibles de toutes parts. Un peu plus de la moiti&eacute; de la population v&eacute;n&eacute;zu&eacute;lienne y vit d'apr&egrave;s l'architecte et urbaniste v&eacute;n&eacute;zu&eacute;lien Alfredo Cilento. Dans les ann&eacute;es 1950, l'exploitation du p&eacute;trole prend un nouvel essor. Les habitants des campagnes se ruent dans la capitale. <i>&laquo;&nbsp;Au cours de la seule ann&eacute;e 1958, 400&nbsp;000 nouveaux habitants s&rsquo;y &eacute;tablirent&nbsp;&raquo;</i>, raconte Serge Ollivier, historien sp&eacute;cialiste de la politique de Caracas. Les nouveaux arrivants prennent possession des espaces libres, construisent eux-m&ecirc;mes leurs maisons, les&nbsp;<i>&laquo;&nbsp;ranchos&nbsp;&raquo;</i>. Aujourd'hui, un tiers de la population du pays vit dans la capitale. L'agglom&eacute;ration compte pr&egrave;s de 8 millions et demi d'habitants, le Venezuela plus de 31 millions et demi.</span></span></span></p>
+                        <p class="inter-titre-gris"><span><span><span><b>Chavez dans les m&eacute;moires</b></span></span></span></p>
+                        <p><span><span><span>Le <i>&laquo;&nbsp;barrio&nbsp;&raquo;</i> du 23 de Enero est le symbole de cette Caracas chaviste et populaire. Il est le fer de lance de la r&eacute;volution bolivarienne. Organisations d&eacute;fendant un pouvoir populaire, m&eacute;dias communautaires (g&eacute;r&eacute;s par les habitants), collectifs arm&eacute;s ou non de d&eacute;fense de la r&eacute;volution bolivarienne, s'y concentrent. Ironie de l'histoire, le quartier a pris le nom de 23 janvier en m&eacute;moire de la fin de la dictature du g&eacute;n&eacute;ral Marcos P&eacute;rez Jim&eacute;nez (1952-58), alors que c'est ce dernier qui a construit les premiers immeubles, semblables &agrave; nos HLM, aujourd'hui d&eacute;cr&eacute;pis.</span></span></span><span>&nbsp;</span></p>
+                        <p>
+                            <span>
+                        <div class="media media-align-center media-image format-100-pcent format-image"><img src="http://static.mediapart.fr/files/media_71254/Les_tours_du_23_de_Enero_Caracas._Copyright___JB.Mouttet.JPG" alt="Les tours du 23 de Enero, Caracas" title="Les tours du 23 de Enero, Caracas" width="770" height="512"><span class="legend">Les tours du 23 de Enero, Caracas <span class="copyright">&copy; JBM</span></span></div></span></p>
+                        <p>
+                            <span>
+                                <span>
+                                    <span>
+                                        En haut d'une colline, le <i>&laquo;&nbsp;cuartel de la montana&nbsp;&raquo;</i>, la caserne de la montagne, un imposant &eacute;difice militaire rose p&acirc;le surmont&eacute; du chiffre et de la lettre 4F, surplombe la ville. 4F, comme 4 f&eacute;vrier 1992, date du coup d'&Eacute;tat rat&eacute; de Hugo Chavez contre le pr&eacute;sident Carlos Andres Perez (mars 1974-mars 1979, f&eacute;vrier 1989-mai 1993). C'est d'ici que le jeune militaire supervisait les op&eacute;rations. C'est d'ici encore qu'il a tenu son discours de reddition qui l'a rendu populaire. Tout en assumant enti&egrave;rement l'&eacute;chec de l'op&eacute;ration, il laissait entendre qu'il reviendrait en l&acirc;chant les mots devenus fameux&nbsp;: <i>&laquo;&nbsp;por ahora&nbsp;&raquo;</i>, <i>&laquo;&nbsp;pour le moment&nbsp;&raquo;</i>. C'est ici enfin qu'il repose et que les V&eacute;n&eacute;zu&eacute;liens viennent se recueillir autour de sa tombe de marbre. <i>&laquo;&nbsp;Hasta siempre Comandante&nbsp;&raquo;</i>, est-il inscrit &agrave; la peinture rouge sous un portrait de Chavez en habit militaire.
+                        <div class="media media-align-center media-image format-100-pcent format-770_pixels"><img src="http://static.mediapart.fr/files/imagecache/770_pixels/media_71254/_El_cuartel_de_la_montana__ou_repose_Hugo_Chavez._Copyright___JB.Mouttet.JPG" alt="&amp;quot;El cuartel de la montana&amp;quot;, o&ugrave; repose Hugo Chavez" title="&amp;quot;El cuartel de la montana&amp;quot;, o&ugrave; repose Hugo Chavez" width="770" height="513"><span class="legend">"El cuartel de la montana", o&ugrave; repose Hugo Chavez <span class="copyright">&copy; JBM</span></span></div></span></span></span></p>
+                        <p><span><span><span>Juan Contreras, depuis son bureau de la coordination Simon Bolivar, organisation qui d&eacute;fend la construction d'un pouvoir local, g&egrave;re une station radio, une librairie, et parle plus facilement de l'h&eacute;ritage de Hugo Chavez que de son successeur, le pr&eacute;sident socialiste Nicolas Maduro&nbsp;: <i>&laquo;&nbsp;Maduro suit le programme de Chavez. Les missions</i>&nbsp;[ndlr&nbsp;: programmes sociaux]&nbsp;<i>se poursuivent&nbsp;&raquo;</i>, r&eacute;p&egrave;te-t-il. L'ins&eacute;curit&eacute;&nbsp;? <i>&laquo;&nbsp;Le probl&egrave;me principal est l'in&eacute;galit&eacute;, pas l'ins&eacute;curit&eacute;. La d&eacute;linquance est amplifi&eacute;e m&eacute;diatiquement pour contrer la r&eacute;volution.&nbsp;&raquo;</i> Il voudrait cependant que Nicolas Maduro soit plus dur, avec plus de patrouilles, de cam&eacute;ras. Le mouvement &eacute;tudiant&nbsp;? <i>&laquo;&nbsp;Il s'agit d'un plan de d&eacute;stabilisation. Les manifestants et l'opposition en g&eacute;n&eacute;ral veulent cr&eacute;er le chaos entre les fr&egrave;res. Il s'agit d'une oligarchie qui ne conna&icirc;t pas les sentiments du peuple.&nbsp;&raquo;</i></span></span></span><span>&nbsp;</span></p>
+                        <p><span><span><span>Tout proche du <i>&laquo;&nbsp;</i></span></span></span><i><span><span><span>cuartel de la montana&nbsp;</span></span></span></i><span><span><i>&raquo;</i>, &agrave; c&ocirc;t&eacute; de la chapelle en l'honneur de &laquo;&nbsp;Santo Chavez&nbsp;&raquo; (lire <a href="http://bit.ly/1jFwaux" class="external" target="_blank">&laquo;&nbsp;Santo&nbsp;&raquo; Chavez plane sur l'&eacute;lection de son successeur</a>)</span></span><span><span><span>,</span></span></span><span><span><span><i>&nbsp;</i></span></span></span><span><span><span>accoud&eacute;e &agrave; un kiosque que le gouvernement a offert &agrave; son amie avec laquelle elle discute, No&eacute;mie Alma, femme au foyer, se fait plus critique&nbsp;: <i>&laquo;&nbsp;</i></span></span></span><i><span><span><span>Chavez me manque. &Ccedil;a ne fait aucun doute. Nous n'avons jamais eu de p&eacute;nuries de cette ampleur avec lui</span></span></span></i><span><span><span><i>.&nbsp;&raquo;</i> Le papier, l'huile, le lait, la farine de ma&iuml;s, le caf&eacute; manquent toujours. Les g&eacute;rants &eacute;talent une unique marque dans les rayons. Lorsqu'un commerce parvient &agrave; se procurer des produits tr&egrave;s demand&eacute;s, comme le papier-toilette, les files d'attente se forment imm&eacute;diatement. <i>&laquo;&nbsp;</i></span></span></span><i><span><span><span>Mais les manifestations n'arrangent rien. Avec leurs barricades, ils nous emp&ecirc;chent d'aller au travail&nbsp;</span></span></span></i><span><span><span><i>&raquo;</i>, dit la quinquag&eacute;naire, avant de conclure <i>&laquo;&nbsp;</i></span></span></span><i><span><span><span>nous devons sauvegarder la r&eacute;volution</span></span></span></i><span><span><span><i>&nbsp;&raquo;</i>. Sur la place o&ugrave; donne le kiosque, des employ&eacute;s municipaux s'activent &agrave; repeindre les bandes jaunes d'interdiction de stationnement des trottoirs, des tribunes sont mont&eacute;es au <i>&laquo;&nbsp;</i></span></span></span><i><span><span><span>cuartel de la montana&nbsp;</span></span></span></i><span><span><span><i>&raquo;</i>. Le premier anniversaire de la mort de Hugo Chavez, le 5 mars, se pr&eacute;pare.</span></span></span></p>
+                        <div id="lire-aussi" class="left">
+                            <div class="une-list">
+                                <h2 class="title">Lire aussi</h2>
+                                <div class="item-list">
+                                    <ul>
+                                        <li class="first">
+                                            <h3 class="h9"><a href="http://www.mediapart.fr/journal/international/090314/au-venezuela-des-manifestations-quasi-insurrectionnelles">Au Venezuela, des manifestations &laquo;&nbsp;quasi insurrectionnelles&nbsp;&raquo;</a></h3>
+                                            <p class="author under-title">
+                                                Par <span class="journalist">Jean-Baptiste Mouttet</span>
+                                            </p>
+                                        </li>
+                                        <li class="last">
+                                            <h3 class="h9"><a href="http://www.mediapart.fr/journal/international/080314/au-venezuela-les-manifestants-peinent-mobiliser-les-classes-populaires">Au Venezuela, les manifestants peinent &agrave; mobiliser les classes populaires</a></h3>
+                                            <p class="author under-title">
+                                                Par <span class="journalist">Jean-Baptiste Mouttet</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <p><span><span><span>Le 23 est aussi proche physiquement qu'il l'est moralement du pouvoir. En contrebas, plus &agrave; l'est, dans une rue gard&eacute;e par des forces de s&eacute;curit&eacute; imposantes&nbsp;: le palais pr&eacute;sidentiel de Miraflores. Il pourrait passer inaper&ccedil;u. La fa&ccedil;ade principale ne donne pas sur la rue. Le passant peut voir un discret balcon, le balcon du peuple. Hugo Chavez avait pour habitude de s'adresser &agrave; la population de l&agrave;, &agrave; quelques m&egrave;tres du sol, lors des victoires &eacute;lectorales, des comm&eacute;morations des dates importantes de la r&eacute;volution bolivarienne. Alors qu'il est m&ecirc;me interdit par mesure de s&eacute;curit&eacute; de marcher sur le trottoir qui longe le palais, les grilles s'ouvraient et les militants s'engouffraient dans la cour int&eacute;rieure. Nicolas Maduro a repris cette habitude.</span></span></span></p>
+                        <h2 class="h4">Dans le centre : « Ici, c'est pas l'Ukraine »</h2>
+                        <p>
+                            <i><span>&laquo;&nbsp;</span>On respecte Maduro car Chavez l'a nomm&eacute; comme successeur. Il faut lui laisser du temps&nbsp;</i><span><i>&raquo;</i>, assure Jos&eacute;, vendeur de <i>respado</i>, une boisson faite de glace pil&eacute;e et sirop, non loin de la place O'Leary et de ses immeubles jaunes aux arcades d'habitude commer&ccedil;antes et vivantes. Le vendeur de boisson glac&eacute;e est bien seul en ce jour f&eacute;ri&eacute; d&eacute;cr&eacute;t&eacute; par Nicolas Maduro. Les rideaux des commerces sont tir&eacute;s, une m&egrave;re de famille revend des habits usag&eacute;s sur le trottoir. <i>&laquo;&nbsp;</i></span><i>Il ne faut pas croire ce que disent les m&eacute;dias internationaux comme CNN. Ici, c'est pas l'Ukraine. Regarde, tout est calme. Les manifestants sont une minorit&eacute;</i><span><i>&nbsp;&raquo;</i>, poursuit-il. Le pr&eacute;sident Nicolas Maduro s'en &eacute;tait pris, le 20 f&eacute;vrier, &agrave; la cha&icirc;ne nord-am&eacute;ricaine accus&eacute;e de vouloir d&eacute;montrer <i>&laquo;&nbsp;</i></span><i>qu'il y a une guerre civile&nbsp;</i><span><i>&raquo;</i>. Une &eacute;quipe a &eacute;t&eacute; expuls&eacute;e du pays tandis qu'une autre prenait sa place.</span>
+                            <span>
+                                &nbsp;
+                        <div class="media media-align-center media-image format-100-pcent format-770_pixels"><img src="http://static.mediapart.fr/files/imagecache/770_pixels/media_71254/En_ce_jour_ferie_les_commerces_sont_fermes._Copyright___JB.Mouttet.JPG" alt="En ce jour f&eacute;ri&eacute;, les commerces sont ferm&eacute;s." title="En ce jour f&eacute;ri&eacute;, les commerces sont ferm&eacute;s." width="770" height="494"><span class="legend">En ce jour f&eacute;ri&eacute;, les commerces sont ferm&eacute;s. <span class="copyright">&copy; JBM</span></span></div></span></p>
+                        <p>C'est un des rares quartiers de la capitale qui a conserv&eacute; ses maisons coloniales, avec ses cours int&eacute;rieures. Certaines peuvent &ecirc;tre visit&eacute;es comme la maison natale de Simon Bolivar o&ugrave;, sur le pupitre de l'accueil, tr&ocirc;ne un portrait de Hugo Chavez. Le p&egrave;re de l'ind&eacute;pendance du pays est omnipr&eacute;sent au Venezuela. Si Hugo Chavez comme Nicolas Maduro s'en inspirent, il est aussi une r&eacute;f&eacute;rence pour l'opposition. Sur la place El Venezuelano, sur une vingtaine de m&egrave;tres, est grav&eacute;e une citation du <i>&laquo;&nbsp;Libertador&nbsp;&raquo;</i>&nbsp;&eacute;rig&eacute;e sous le mandat du&nbsp;<i>comandante</i>&nbsp;en 2010&nbsp;: <i>&laquo;&nbsp;Si s'oppose la nature, nous lutterons contre elle et ferons qu'elle nous ob&eacute;isse.&nbsp;&raquo;</i> Dans un pays victime de tremblements de terre et de glissements de terrains, cette d&eacute;claration sonne diff&eacute;remment qu'&agrave; des oreilles fran&ccedil;aises.</p>
+                        <p>&Agrave;&nbsp;Caracas, comme dans toutes les villes v&eacute;n&eacute;zu&eacute;liennes, des plus grandes aux plus petites, la place centrale se nomme place Bolivar. Tous les pouvoirs s'y concentrent&nbsp;: spirituel avec la cath&eacute;drale de Caracas et le palais archi&eacute;piscopal et temporel avec le palais municipal, la maison jaune (le minist&egrave;re des affaires &eacute;trang&egrave;res), le si&egrave;ge du gouvernement de l'agglom&eacute;ration et, au sud de la place, dans une rue adjacente l'Assembl&eacute;e nationale, d'un blanc immacul&eacute;. Au centre de la place arbor&eacute;e, une statue de Simon Bolivar. Les enfants s'amusent &agrave; donner &agrave; manger &agrave; des &eacute;cureuils en attendant que des concerts d&eacute;butent. Malgr&eacute; cette ambiance festive ici aussi, la r&eacute;volution bolivarienne n'est pas loin.<span>&nbsp;</span></p>
+                        <p>Sous une tente, install&eacute;e ici depuis des ann&eacute;es par le collectif <i>&laquo;&nbsp;Esquina caliente&nbsp;&raquo;</i> (coin de la rue chaude), une dizaine de personnes &acirc;g&eacute;es regardent VTV, une cha&icirc;ne publique, assises sur des chaises en plastique. Deux d'entre elles se demandent ce que repr&eacute;sentent les manifestants&nbsp;: <i>&laquo;&nbsp;Une minorit&eacute;, des fascistes&nbsp;&raquo;</i>, tranche un homme, <i>&laquo;&nbsp;la majorit&eacute; des &eacute;tudiants veulent travailler&nbsp;&raquo;</i>, veut-il croire.</p>
+                        <p class="inter-titre-gris"><b>L'inflation&nbsp;: la pr&eacute;occupation</b><span>&nbsp;</span></p>
+                        <p>De l'autre c&ocirc;t&eacute; de l'autoroute, toujours plus &agrave; l'est, sur plus de 200 hectares s'&eacute;tale dans la verdure l'Universit&eacute; centrale du Venezuela qui a connu une longue histoire de contestations avant m&ecirc;me l'acc&egrave;s au pouvoir de Hugo Chavez. Construite entre 1940 et 1960, dans le style Bauhaus, elle est au patrimoine de l'Unesco depuis 2000. Elle est ferm&eacute;e en ce jour f&eacute;ri&eacute;. Des jeunes jouent au basket, tandis que d'autres r&eacute;visent sur la pelouse. Parmi eux, Maria Velasquez dit suivre attentivement les &eacute;v&eacute;nements. Elle ne participe pas &agrave; toutes les manifestations&nbsp;: <i>&laquo;&nbsp;Ils ne devraient pas construire des barricades, s'opposer aux forces de l'ordre, &ccedil;a va trop loin. Mais ceux-l&agrave; ne sont qu'une minorit&eacute;&nbsp;&raquo;</i>, dit-elle.</p>
+                        <p>Un autre groupe profite de l'ombre d'un arbre. Tous &eacute;tudiants en anthropologie, ils ne se reconnaissent pas dans le mouvement &eacute;tudiant. <i>&laquo;&nbsp;Ce sont des marionnettes manipul&eacute;es par les politiques. Les dirigeants de ces mouvements, on ne les voit pas trop sur le campus&nbsp;&raquo;</i>, s'exclame Luis, 19 ans. <i>&laquo;&nbsp;Ce sont des gens de l'est. Ils sont loin, indiff&eacute;rents aux probl&egrave;mes du peuple&nbsp;&raquo;</i>, continue-t-il. Les cinq amis citent la diminution de la pauvret&eacute;, les programmes d'alphab&eacute;tisation pour d&eacute;fendre les politiques initi&eacute;es par Hugo Chavez. Luis, un didgeridoo sur les genoux, reprend son ami&nbsp;: <i>&laquo;&nbsp;Oui, mais c'est pas un paradis non plus. Les dirigeants socialistes ont un double discours.&nbsp;&raquo;</i> <i>&laquo;&nbsp;Ils parlent par exemple de paix et l'arm&eacute;e n'a jamais &eacute;t&eacute; aussi proche du pouvoir&nbsp;&raquo;</i>, embraye, un troisi&egrave;me, Andr&egrave;s.</p>
+                        <p>Ils se mettent par contre tous d'accord sur le responsable des probl&egrave;mes &eacute;conomiques&nbsp;: <i>&laquo;&nbsp;Les p&eacute;nuries, l'inflation, bien s&ucirc;r que le probl&egrave;me vient du gouvernement. Le taux de change fix&eacute; par l'&Eacute;tat favorise la sp&eacute;culation. Nicolas Maduro ne prend pas les mesures ad&eacute;quates. Malgr&eacute; la prise en main d'activit&eacute;s agricoles, la cr&eacute;ation de coop&eacute;ratives, nous ne parvenons toujours pas &agrave; produire suffisamment. On est toujours d&eacute;pendant des pays &eacute;trangers et les prix montent&nbsp;&raquo;</i>, explique Luis.</p>
+                        <p>Au Sambil, La Mecque de la consommation &agrave; Caracas, l'activit&eacute; semble pourtant tourner. Les all&eacute;es des 250&nbsp;000 m&egrave;tres<sup>2</sup> du &laquo;&nbsp;Mall&nbsp;&raquo;, ses quatre &eacute;tages sont pleins de clients potentiels. Les grandes marques internationales, comme Zara, Jules, ont ouvert leurs portes. Mais &agrave; y regarder de plus pr&egrave;s des magasins sont ferm&eacute;s. La plupart parce que nous sommes un jour f&eacute;ri&eacute;, mais d'autres n'ont aucun produit en vitrine et on peut douter qu'ils rouvrent un jour. Les visiteurs n'ont pas de sacs de commerce. Une vendeuse dans un magasin d'une grande marque de v&ecirc;tement, Veronica Guevarra, reconna&icirc;t que ses prix ont doubl&eacute; en un an&nbsp;: <i>&laquo;&nbsp;Avant, un jean co&ucirc;tait 2&nbsp;000&nbsp;</i><i>bolivars </i>(ndlr&nbsp;: 230 euros au change officiel, 20 au parall&egrave;le)<i>, aujourd'hui il atteint presque 4&nbsp;000 bolivars&nbsp;</i>(ndlr&nbsp;: 460 euros au change officiel, 40 au parall&egrave;le)<i>.&nbsp;&raquo;</i> En mati&egrave;re de client&egrave;le, la d&eacute;saffection est de l'ordre de 40 %, selon elle, compar&eacute; &agrave; d&eacute;cembre (lire <a href="http://bit.ly/1q6FNWa" class="external" target="_blank">Les manifestations au Venezuela&nbsp;: premier test pour Maduro</a>).</p>
+                        <div class="media media-align-center media-image format-100-pcent format-770_pixels"><img src="http://static.mediapart.fr/files/imagecache/770_pixels/media_71254/Le_Sambil_centre_commercial._Copyright___JB.Mouttet.JPG" alt="Le Sambil, centre commercial" title="Le Sambil, centre commercial" width="770" height="1159"><span class="legend">Le Sambil, centre commercial <span class="copyright">&copy; JBM</span></span></div>
+                        <p><i>&laquo;&nbsp;Ah non, nous ne sommes pas ici pour acheter&nbsp;!&nbsp;&raquo;</i> rigole Cari Pietro, la trentaine, accompagn&eacute;e de son ami, consciente de l'absurdit&eacute; de la situation. <i>&laquo;&nbsp;C'est devenu trop cher. Nous devons faire attention et d&eacute;penser uniquement ce dont nous avons besoin. C'est un jour f&eacute;ri&eacute;. Nous sommes juste venus ici pour nous distraire.&nbsp;&raquo;</i> Le couple dit gagner environ 10&nbsp;000 bolivars &agrave; deux&nbsp;<i>(</i>presque 1&nbsp;160 euros), 5&nbsp;000 bolivars chacun (ndlr&nbsp;: 580 euros &ndash;&nbsp;le salaire minimum est de 3&nbsp;270 bolivars mensuel, 380 euros). <i>&laquo;&nbsp;La plus grande partie de nos revenus part dans le loyer&nbsp;&raquo;</i>, avoue Cari. Un appartement de 70&nbsp;m<sup>2</sup> dans le quartier d&eacute;volu &agrave; la classe moyenne Santa Rosalia <a href="http://bit.ly/1hKaCLR" class="external" target="_blank">est lou&eacute; 5&nbsp;700 bolivars</a> (660 euros) au mois<i>.</i></p>
+                        <h2 class="h4">La nuit tombe sur la violence</h2>
+                        <p>Sambil est une zone tampon. Bien que situ&eacute; &agrave; Chacao, municipalit&eacute; ais&eacute;e et &eacute;picentre de la contestation, toutes les classes sociales se m&ecirc;lent dans ce quartier. La fracture est bien plus nette lorsque le voyageur emprunte l'avenue Libertador. Sous un pont, le logo orange et noir de la municipalit&eacute; pr&eacute;vient l'automobiliste de son entr&eacute;e dans un autre secteur administratif. Au-dessus, des banderoles sont accroch&eacute;es&nbsp;: <i>&laquo;&nbsp;Ici on ne vit pas, on survit&nbsp;&raquo;</i>, peut-on lire sur l'une d'entre elles. Sans le voir, l'automobiliste passe sous le country club et <a href="http://www.caracascountryclub.org/index.php" class="external" target="_blank">son terrain de golf</a>.</p>
+                        <p>Apr&egrave;s les ponts successifs, Chacao se d&eacute;voile&nbsp;: des immeubles sombres, des commerces, notamment de TV-hifi, vid&eacute;o. Plus de citations de Chavez peintes sur les murs, mais parfois des gravats &agrave; terre rappellent qu'une barricade a ici &eacute;t&eacute; mont&eacute;e. Brusquement, on aper&ccedil;oit de la fum&eacute;e, la gorge br&ucirc;le, les yeux piquent&nbsp;: des gaz lacrymog&egrave;nes. Un tronc d'arbre coupe la route. Nous arrivons &agrave; la place Altamira ou place Francia. Un mannequin de Nicolas Maduro est pendu &agrave; un feu de signalisation. <i>&laquo;&nbsp;Maduro = Juda&nbsp;&raquo;</i>, est-il inscrit sur un carton qu'il porte autour du cou.&nbsp;</p>
+                        <div class="media media-align-center media-image format-100-pcent format-770_pixels"><img src="http://static.mediapart.fr/files/imagecache/770_pixels/media_71254/La_place_Altamira_du_cote__calme_._Copyright___JB.Mouttet.JPG" alt="La place Altamira du c&ocirc;t&eacute; &amp;quot;calme&amp;quot;" title="La place Altamira du c&ocirc;t&eacute; &amp;quot;calme&amp;quot;" width="770" height="515"><span class="legend">La place Altamira du c&ocirc;t&eacute; "calme" <span class="copyright">&copy; JBM</span></span></div>
+                        <p>Sous l'&oelig;il de l'ob&eacute;lisque, quelques centaines de manifestants ont pris possession de la place comme chaque soir. <i>&laquo;&nbsp;Les &eacute;tudiants ont toujours fait tomber les dictateurs&nbsp;&raquo;</i>, clame une pancarte. Un scooter tra&icirc;nant des gravats traverse la foule. Il va renforcer une barricade. Jets de pierre, lancers de cocktails Molotov. La r&eacute;ponse ne se fait pas attendre&nbsp;: une pluie de gaz lacrymog&egrave;ne. Lance-pierre &agrave; la main, un masque des Anonymous sur le cr&acirc;ne, celui qui dit s'appeler Pedro, qui n'est pas &eacute;tudiant, d&eacute;fend l'usage de la violence&nbsp;: <i>&laquo;&nbsp;Si nous ne le faisons pas, la garde nationale bolivarienne va en profiter pour monter et nous brutaliser. Nous devons les garder &agrave; distance. Nous sommes en r&eacute;sistance contre la r&eacute;pression.&nbsp;&raquo;</i> Dans tout le pays, 47 personnes se sont fait arr&ecirc;ter lors de cette seule soir&eacute;e. Il y a eu 18 morts depuis le d&eacute;but des manifestations.</p>
+                        <p>Nouveau lancer de lacrymog&egrave;ne. Les manifestants reculent. Deux jeunes versent de l'essence dans des bouteilles de bi&egrave;res. Un troisi&egrave;me pr&eacute;pare les m&egrave;ches. <i>&laquo;&nbsp;Il n'y a pas de bonne mani&egrave;re de protester. Il faut agir. Tout est entre les mains du gouvernement jusqu'au syst&egrave;me &eacute;lectoral&nbsp;&raquo;</i>, justifie Elia, &eacute;tudiante. <i>&laquo;&nbsp;Des motards&nbsp;! des motards&nbsp;!&nbsp;&raquo;</i>, crie quelqu'un et tout un groupe de jeunes s'enfuient en courant. C'est &agrave; moto que des collectifs arm&eacute;s auraient tir&eacute; sur les opposants.</p>
+                        <p>Les manifestants reculent encore. La nuit est tomb&eacute;e. Une jeune femme appelle &agrave; la dispersion&nbsp;: <i>&laquo;&nbsp;On ne voit plus rien&nbsp;! C'est trop dangereux&nbsp;! On revient demain&nbsp;!&nbsp;&raquo;</i>, <i>&laquo;&nbsp;On revient demain&nbsp;!&nbsp;&raquo;</i> lui r&eacute;pondent plusieurs voix. En une dizaine de minutes, les opposants au gouvernement ont quitt&eacute; la place. Le mannequin de Nicolas Maduro est en feu.</p>
+                        <div class="media media-align-center media-image format-100-pcent format-770_pixels"><img src="http://static.mediapart.fr/files/imagecache/770_pixels/media_71254/Dans_la_soiree_les_etudiants_et_les_forces_de_lordre_saffrontent.jpeg" alt="Dans la soir&eacute;e, les &eacute;tudiants et les forces de l&amp;#039;ordre s&amp;#039;affrontent." title="Dans la soir&eacute;e, les &eacute;tudiants et les forces de l&amp;#039;ordre s&amp;#039;affrontent." width="770" height="512"><span class="legend">Dans la soir&eacute;e, les &eacute;tudiants et les forces de l'ordre s'affrontent. <span class="copyright">&copy; JBM</span></span></div>
+                        <p>&Agrave;&nbsp;une centaine de m&egrave;tres de l&agrave;, derri&egrave;re les grilles de son immeuble, Vilmar London, la cinquantaine, dit comprendre les jeunes&nbsp;: <i>&laquo;&nbsp;Nous sommes pouss&eacute;s &agrave; bout. Il est logique que les choses d&eacute;rapent&nbsp;&raquo;</i>, assure-t-elle. <i>&laquo;&nbsp;Toutes les cha&icirc;nes de t&eacute;l&eacute;vision disent que tout va pour le mieux, que tout va bien mais on est fatigu&eacute;s. Chaque jour, il y a de nouveaux morts, des tu&eacute;s par balles qui n'ont rien &agrave; voir avec les manifestations&nbsp;&raquo;</i>, dit-elle en &eacute;cho aux personnes rencontr&eacute;es &agrave; l'ouest. Depuis que la cha&icirc;ne Globovision a &eacute;t&eacute; reprise par des personnes plus conciliantes envers le pouvoir, la critique a disparu des cha&icirc;nes v&eacute;n&eacute;zu&eacute;liennes. La presse papier, quant &agrave; elle, est en majorit&eacute; du c&ocirc;t&eacute; de l'opposition.</p>
+                        <p>Sur la place Palos Grandes, toute proche, les violences de la soir&eacute;e ne semblent pas avoir d&eacute;rang&eacute; les habitudes des habitants. Au pied d'une biblioth&egrave;que neuve, des enfants font du v&eacute;lo, les adultes discutent sur des bancs. C'est parfois ici que les assembl&eacute;es d'&eacute;tudiants ont lieu dans la journ&eacute;e. Sur une toile tendue sur une grille, les opposants ont inscrit <i>&laquo;&nbsp;ce qu'</i>[ils]&nbsp;<i>veulent pour le Venezuela&nbsp;&raquo;</i>&nbsp;: <i>&laquo;&nbsp;Plus de corruption&nbsp;&raquo;</i>, <i>&laquo;&nbsp;plus de cha&icirc;nes&nbsp;&raquo;</i>, <i>&laquo;&nbsp;un pays plein d'opportunit&eacute;&nbsp;&raquo;</i>, <i>&laquo;&nbsp;que le gouvernement s'en aille&nbsp;&raquo;</i>... <i>&laquo;&nbsp;Il faut manifester pacifiquement. Avec les politiques de l'opposition, c'est difficile. Ils sont divis&eacute;s. Henrique Capriles</i>&nbsp;(ndlr&nbsp;: candidat de l'opposition d&eacute;fait &agrave; deux reprises lors des &eacute;lections pr&eacute;sidentielles en octobre 2012 contre Hugo Chavez et en 14 avril 2013 contre Nicolas Maduro)&nbsp;<i>a &eacute;t&eacute; trop conciliant avec le pouvoir. Il n'a pas tout de suite appuy&eacute; les manifestations. En ce moment, je pencherais plus pour Leopoldo Lopez, il est plus direct&nbsp;&raquo;</i>, fait savoir Julia Canizales, la trottinette de sa petite-fille &agrave; la main.&nbsp;</p>
+                        <div id="lire-aussi" class="left">
+                            <div class="une-list">
+                                <h2 class="title">Lire aussi</h2>
+                                <div class="item-list">
+                                    <ul>
+                                        <li class="first">
+                                            <h3 class="h9"><a href="http://www.mediapart.fr/journal/international/090314/au-venezuela-des-manifestations-quasi-insurrectionnelles">Au Venezuela, des manifestations &laquo;&nbsp;quasi insurrectionnelles&nbsp;&raquo;</a></h3>
+                                            <p class="author under-title">
+                                                Par <span class="journalist">Jean-Baptiste Mouttet</span>
+                                            </p>
+                                        </li>
+                                        <li class="last">
+                                            <h3 class="h9"><a href="http://www.mediapart.fr/journal/international/080314/au-venezuela-les-manifestants-peinent-mobiliser-les-classes-populaires">Au Venezuela, les manifestants peinent &agrave; mobiliser les classes populaires</a></h3>
+                                            <p class="author under-title">
+                                                Par <span class="journalist">Jean-Baptiste Mouttet</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Leopoldo Lopez a &eacute;t&eacute; maire de Chacao de 2000 &agrave; 2008. Le dirigeant du parti Volont&eacute; populaire est en pointe de la contestation. Il a &eacute;t&eacute; arr&ecirc;t&eacute; pour incitation &agrave; la violence, &agrave; la suite des manifestations du 12 f&eacute;vrier marqu&eacute;es par trois morts. Sur la place Palos Grandes, chacun loue sa politique&nbsp;: <i>&laquo;&nbsp;Il a continu&eacute; de renforcer les effectifs de la police qui sont ici tr&egrave;s bien pay&eacute;s. Il a donn&eacute; vie &agrave; Chacao en organisant des &eacute;v&eacute;nements culturels comme des concerts.&nbsp;&Agrave; la diff&eacute;rence d'autres municipalit&eacute;s, ici c'est propre, des efforts sont faits dans les infrastructures&nbsp;&raquo;</i>, &eacute;num&egrave;re Miguel Perez, &eacute;tudiant en m&eacute;canique. Pour les habitants de Chacao, Leopoldo Lopez est sans conteste le nouveau meneur de l'opposition.</p>
+                    </div>
+                </div>
+                <div class="col-right aside-region fractal-desktop fractal-10-desktop collapse-3-desktop fractal-tablet fractal-6-tablet collapse-2-tablet">
+                    <div class="col-right-content">
+                        <div class="keywords related_tag">
+                            <h2 class="title-specific bg-highlight separator-t bolded">Mots-clés</h2>
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first"><a href="http://www.mediapart.fr/journal/mot-cle/manifestations">manifestations</a></li>
+                                    <li><a href="http://www.mediapart.fr/journal/mot-cle/venezuela">Venezuela</a></li>
+                                    <li><a href="http://www.mediapart.fr/journal/mot-cle/hugo-chavez">Hugo Chavez</a></li>
+                                    <li><a href="http://www.mediapart.fr/journal/mot-cle/amerique-du-sud">Amérique du sud</a></li>
+                                    <li><a href="http://www.mediapart.fr/journal/mot-cle/caracas">Caracas</a></li>
+                                    <li class="last"><a href="http://www.mediapart.fr/journal/mot-cle/nicolas-maduro">Nicolas Maduro</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="simple-list last_translate">
+                            <h2 class="title-specific bg-highlight separator-t bolded">Derniers articles</h2>
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/polemique-sur-le-temoignage-posthume-de-lancien-directeur-de-fukushima">Polémique sur le témoignage posthume de l'ancien directeur de Fukushima</a></h3>
+                                    </li>
+                                    <li class="">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/comment-fonctionnerait-une-ecosse-independante">Comment fonctionnerait une Ecosse indépendante?</a></h3>
+                                    </li>
+                                    <li class="">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/110914/un-trafic-de-visas-est-decouvert-au-consulat-de-france-derbil-en-irak">Un trafic de visas est découvert au consulat de France d'Erbil en Irak</a></h3>
+                                    </li>
+                                    <li class="">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/110914/la-catalogne-defie-nouveau-madrid">La Catalogne défie à nouveau Madrid</a></h3>
+                                    </li>
+                                    <li class="last">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/100914/commission-europeenne-les-choix-douteux-de-juncker">Commission européenne: les choix douteux de Juncker</a></h3>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="simple-list related_folder">
+                            <h2 class="title-specific bg-highlight separator-t bolded">Dossier</h2>
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first last"><a href="http://www.mediapart.fr/journal/international/dossier/notre-dossier-hugo-chavez-et-le-chavisme">Notre dossier : Hugo Chávez et le chavisme</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="simple-list same_author">
+                            <h2 class="title-specific bg-highlight separator-t bolded">Du même auteur</h2>
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/polemique-sur-le-temoignage-posthume-de-lancien-directeur-de-fukushima">Polémique sur le témoignage posthume de l'ancien directeur de Fukushima</a></h3>
+                                    </li>
+                                    <li class="">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/commission-europeenne-la-pression-saccentue-sur-lespagnol-canete">Commission européenne: la pression s'accentue sur l'Espagnol Cañete</a></h3>
+                                    </li>
+                                    <li class="">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/dominique-de-villepin-fustige-lintervention-militaire-en-irak">Dominique de Villepin fustige l'intervention militaire en Irak</a></h3>
+                                    </li>
+                                    <li class="">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/france/120914/grand-stade-de-lille-laffaire-judiciaire-qui-gene-martine-aubry">Grand Stade de Lille&nbsp;: l'affaire judiciaire qui gêne Martine Aubry</a></h3>
+                                    </li>
+                                    <li class="last">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/francois-hollande-en-deplacement-en-irak">François Hollande en déplacement en Irak</a></h3>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="simple-list multimedia-list related_multimedias_content">
+                            <h2 class="title-specific bg-highlight separator-t bolded">Multimédias</h2>
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first last">
+                                        <p class="type"><a href="http://www.mediapart.fr/journal/audio/largentine-sous-la-menace-dune-nouvelle-faillite"><span class="ico" data-icon="." aria-hidden="true"></span> Podcast</a></p>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/audio/largentine-sous-la-menace-dune-nouvelle-faillite">L'Argentine sous la menace d'une nouvelle faillite </a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/29204" class="journalist" title="Tous les articles de martine orange">martine orange</a>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="simple-list related_club_content_node">
+                            <h2 class="title-specific bg-highlight separator-t bolded">Dans le club</h2>
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first">
+                                        <h3 class="h8 title"><a href="http://blogs.mediapart.fr/blog/esther-benbassa/290714/je-suis-elue-eelv-je-suis-juive-je-suis-allee-la-manif-du-23-et-je-nai-pas-de-probleme-avec-isr">Je suis élue EELV, je suis juive, je suis allée à la manif du 23, et je n'ai pas de "problème avec Israël"</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://blogs.mediapart.fr/blog/esther-benbassa" class="subscriber" title="Le blog de Esther Benbassa">Esther Benbassa</a>
+                                        </p>
+                                    </li>
+                                    <li class="">
+                                        <h3 class="h8 title"><a href="http://blogs.mediapart.fr/blog/senateur-goulet/200714/un-sombre-20-juillet-2014-pour-la-republique-francaise">Un sombre 20 juillet 2014 pour la République Française</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://blogs.mediapart.fr/blog/senateur-goulet" class="subscriber active" title="Le blog de Sénateur Goulet">Sénateur Goulet</a>
+                                        </p>
+                                    </li>
+                                    <li class="last">
+                                        <h3 class="h8 title"><a href="http://blogs.mediapart.fr/blog/olivierbeuvelet/060414/pelo-malo-un-film-contre-la-cloture-des-genres" class="active">Pelo malo, un film contre la clôture des genres... </a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://blogs.mediapart.fr/blog/olivierbeuvelet" class="subscriber" title="Le blog de olivierbeuvelet">olivierbeuvelet</a>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="simple-list journal-list title-journal summary_journal_vertical">
+                            <h2 class="title-specific bg-highlight separator-t bolded">Aujourd'hui</h2>
+                            <div class="item-list">
+                                <ul>
+                                    <li class="une first">
+                                        <div class="taxonomy-teaser">
+                                            <strong><img src="http://static.mediapart.fr/sites/all/themes/mediapart/mediapart_v5/images/manchette.png" alt="La une" title="" width="61" height="15" /></strong>
+                                        </div>
+                                        <h3 class="h6 title"><a href="http://www.mediapart.fr/journal/france/120914/ecoutes-de-sarkozy-la-bataille-de-procedure-est-lancee">Ecoutes de Sarkozy: la bataille de procédure est lancée</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/165371" class="journalist" title="Tous les articles de Michel Deléan">Michel Deléan</a>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/comment-fonctionnerait-une-ecosse-independante">Comment fonctionnerait une Ecosse indépendante?</a></h3>
+                                        <p class="author under-title">
+                                            Par <span class="journalist">Sébastien Martin</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/france/120914/christophe-caresche-illustration-et-defense-du-liberalisme-facon-valls">Christophe Caresche, illustration et défense du libéralisme façon Valls</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/54869" class="journalist" title="Tous les articles de Hubert Huertas">Hubert Huertas</a> et <a href="http://www.mediapart.fr/biographie/50016" class="journalist" title="Tous les articles de Mathieu Magnaudeix">Mathieu Magnaudeix</a>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/france/120914/grand-stade-de-lille-laffaire-judiciaire-qui-gene-martine-aubry">Grand Stade de Lille&nbsp;: l'affaire judiciaire qui gêne Martine Aubry</a></h3>
+                                        <p class="author under-title">
+                                            Par <span class="journalist">Geoffrey Livolsi</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/france/110914/pascal-canfin-gauche-cest-social-liberalisme-contre-social-ecologie">Pascal Canfin: «A gauche, c'est social-libéralisme contre social-écologie»</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/50002" class="journalist" title="Tous les articles de Stéphane Alliès">Stéphane Alliès</a>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/120914/polemique-sur-le-temoignage-posthume-de-lancien-directeur-de-fukushima">Polémique sur le témoignage posthume de l'ancien directeur de Fukushima</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/54054" class="journalist" title="Tous les articles de La rédaction de Mediapart">La rédaction de Mediapart</a>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/110914/un-trafic-de-visas-est-decouvert-au-consulat-de-france-derbil-en-irak">Un trafic de visas est découvert au consulat de France d'Erbil en Irak</a></h3>
+                                        <p class="author under-title">
+                                            Par <span class="journalist">Marie Kostrz</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/international/110914/la-catalogne-defie-nouveau-madrid">La Catalogne défie à nouveau Madrid</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/28453" class="journalist" title="Tous les articles de Ludovic Lamant">Ludovic Lamant</a>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/france/110914/des-chercheurs-denoncent-les-entraves-leurs-enquetes-sur-le-fn">Des chercheurs dénoncent les entraves à leurs enquêtes sur le FN</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/26883" class="journalist" title="Tous les articles de Marine Turchi">Marine Turchi</a>
+                                        </p>
+                                    </li>
+                                    <li class="last">
+                                        <h3 class="h8 title"><a href="http://www.mediapart.fr/journal/france/100914/economie-echec-confusion-et-amateurisme">Economie: échec, confusion et amateurisme</a></h3>
+                                        <p class="author under-title">
+                                            Par <a href="http://www.mediapart.fr/biographie/27" class="journalist" title="Tous les articles de Laurent Mauduit">Laurent Mauduit</a>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bust">
+            <div class="menu-article menu-article-bottom pager_bottom">
+                <div class="item-list">
+                    <ul>
+                        <li class="lien-article first"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages" class="active">Enquête</a></li>
+                        <li class="nav-page">
+                            <div class="item-list">
+                                <ul class="pager">
+                                    <li class="pager-item first"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?page_article=1" title="Caracas : la ville aux deux visages" class="active">1</a></li>
+                                    <li class="pager-item"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?page_article=2" title="Dans le centre : « Ici, c&#039;est pas l&#039;Ukraine »" class="active">2</a></li>
+                                    <li class="pager-item last"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?page_article=3" title="La nuit tombe sur la violence" class="active">3</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-connexe last">
+                            <div class="item-list">
+                                <ul>
+                                    <li class="first"><span><span class="lect">lecture</span> <span class="sur">sur</span> une page</span></li>
+                                    <li class="comments-link last"><a href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?onglet=commentaires" class="active"><span aria-hidden="true" data-icon="I" class="ico"></span><span class="txt">59&nbsp;Commentaires</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bust pager_bottom">
+            <p class="p-boite-outils accur8-hidden-desktop accur8-hidden-tablet">
+                <a href="#menuOutilsBottomEl" class="accur8-hidden-desktop menuOutilsLink" id="menuOutilsBottomLink">
+                Partage <span aria-hidden="true" data-icon="-" class="ico"></span>
+                </a>
+            </p>
+            <div class="menuOutils menuOutilsBottom accur8-hidden-mobile" id="menuOutilsBottomEl">
+                <div class="menu-tools">
+                    <div class="item-list">
+                        <ul>
+                            <li class="first"><a href="/bookmark/add/392802"><span aria-hidden="true" data-icon="H" class="ico"></span><span class="txt">Favori</span></a></li>
+                            <li><a href="/vote/node/392802"><span aria-hidden="true" data-icon="%" class="ico"></span><span class="txt">Recommander</span></a></li>
+                            <li><a href="/print/392802"><span aria-hidden="true" data-icon="," class="ico"></span><span class="txt">Imprimer</span></a></li>
+                            <li class="last"><a href="/pdf/392802"><span aria-hidden="true" data-icon="B" class="ico"></span><span class="txt">Article en PDF</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-share">
+                    <div class="item-list">
+                        <ul>
+                            <li class="fb-like fb_edge_widget_with_comment fb_iframe_widget first" data-href="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?onglet=full" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial" data-action="recommend"></li>
+                            <li class="twitter-like"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mediapart.fr/journal/international/210314/caracas-la-ville-aux-deux-visages?onglet=full" data-text="Caracas : la ville aux deux visages" data-via="Mediapart" data-lang="fr">Tweeter</a></li>
+                            <li>
+                                <div class="g-plusone" data-size="medium" data-href="http%3A%2F%2Fwww.mediapart.fr%2Fjournal%2Finternational%2F210314%2Fcaracas-la-ville-aux-deux-visages%3Fonglet%3Dfull"></div>
+                            </li>
+                            <li class="offer last"><a href="/offrir_article/392802"><span aria-hidden="true" data-icon="$" class="ico"></span><span class="txt">Offrir l'article</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bust">
+            <div class="blackbox black_box">
+                <p>Jean-Baptiste Mouttet est journaliste ind&eacute;pendant.</p>
+            </div>
+        </div>
+        <div class="bust">
+            <div class="footer-region">
+                <ul class="footer-list">
+                    <li class="0 first"><a href="http://www.mediapart.fr/qui-sommes-nous">Qui sommes-nous ?</a></li>
+                    <li class="1"><a href="http://www.mediapart.fr/contact">Nous contacter</a></li>
+                    <li class="2"><a href="http://blogs.mediapart.fr/edition/decouvrir-mediapart"><abbr title="Foire Aux Questions">FAQ</abbr></a></li>
+                    <li class="3 last"><a href="http://www.mediapart.fr/journal/pdf">Journal imprimé</a></li>
+                </ul>
+                <ul class="footer-list">
+                    <li class="0 first"><a href="http://www.mediapart.fr/mentions-legales">Mentions légales</a></li>
+                    <li class="1"><a href="http://www.mediapart.fr/charte-editoriale">Charte éditoriale</a></li>
+                    <li class="2"><a href="http://www.mediapart.fr/conditions-generales-d-abonnement-au-journal-mediapart"><abbr title="Conditions Générales de Vente">CGV</abbr></a></li>
+                    <li class="3 last"><a href="http://www.mediapart.fr/informations-techniques">Technique</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
