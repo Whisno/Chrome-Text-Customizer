@@ -3,10 +3,9 @@
     <head>
         <title>Chrome Text Customize test case</title>
         <meta charset="utf-8">
-        <script src="1.0/text_customizer.js" type="text/javascript"></script>
+        <script src="chrome-extension/text_customizer.js" type="text/javascript"></script>
         <script type="text/javascript">
             function hashCode(s) {
-                // Credits to http://stackoverflow.com/a/15710692
                 return s.split("").reduce(function(a,b){
                     a = ((a<<5)-a)+b.charCodeAt(0);
                     return a&a;
@@ -14,16 +13,16 @@
             }
 
             function test01(elem) {
-                var patterns = ['Caracas', 'ville', 'visage'];
+                var matches = ['Caracas', 'ville', 'visage'];
                 var replacements = ['Maracas', 'pomme de pin', ''];
-                findText(elem, patterns, replacements);
+                findAndReplace(elem, matches, replacements);
                 return hashCode(elem.innerHTML) === -490366530;
             }
 
             function test02(elem) {
-                var patterns = [/\w+/i];
+                var matches = [/\w+/i];
                 var replacements = ['Hello world'];
-                findText(elem, patterns, replacements);
+                findAndReplace(elem, matches, replacements);
                 return hashCode(elem.innerHTML) === -1157136757;
             }
 

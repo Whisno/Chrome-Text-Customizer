@@ -1,14 +1,19 @@
-function findText(element, patterns, replacements) {    
+function findAndReplace(element, patterns, replacements) {   
+    if (patterns.length !== replacements.length) {
+        console.error("[Chrome Text Customizer] : matches and replacements are not of the same length.");
+        return;
+    }
+    
     for (var child_i = 0; child_i < element.childNodes.length; child_i++) {
         var child = element.childNodes[child_i];
         // Recursively explore element nodes
         if (child.nodeType === 1) {
             var tag = child.tagName.toLowerCase();
             if (tag !== 'script' && tag !== 'style' && tag !== 'textarea')
-                findText(child, patterns, replacements);
+                findAndReplace(child, patterns, replacements);
         // Process text nodes
         } else if (child.nodeType === 3) {
-            for (replacement_i = 0; replacement_i < patterns.length; replacement_i++) {
+            for (var replacement_i = 0; replacement_i < patterns.length; replacement_i++) {
                 var pattern = patterns[replacement_i];
                 var replacement = replacements[replacement_i];
                 var matches = [];
@@ -30,7 +35,7 @@ function findText(element, patterns, replacements) {
                         }
                     } else {
                         var match;
-                        while (match = pattern.exec(child.data))
+                        while ((match = pattern.exec(child.data) !== null))
                             matches.push(match);
                     }
                     // Apply replacements
