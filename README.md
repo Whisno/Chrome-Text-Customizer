@@ -18,4 +18,7 @@ Thanks to these people for inspiration and code examples :
 - http://code.google.com/p/ireader-extension/
 
 
-** Feedback and pull requests highly appreciated ! **
+
+
+
+**Feedback and pull requests highly appreciated !**

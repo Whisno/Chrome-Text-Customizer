@@ -17,6 +17,6 @@
   - it should always be as straightforward as the use case being executed.
   - the code is ugly
 
-- What to do with html entities ?
+- Go through iframes
 
-- What about generated content ? (ex: ajax)
+- What to do with html entities ?
