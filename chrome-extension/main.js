@@ -1,9 +1,26 @@
-chrome.runtime.sendMessage({cmd: "getRules"}, function(response) {
-    var matches = response.matches;
-    var replacements = response.replacements;
+// Get match/replace strategies stored as strings
+chrome.storage.sync.get({
+    matchesTypes: [],
+    matchesAsStrings: [],
+    replacementsTypes: [],
+    replacementsAsStrings: []
+}, function(options) {
     
-    if (matches === undefined || replacements === undefined) 
-        console.error("[Chrome Text Customizer] Error : matches/replacements are undefined. There might be a communication problem with the background page.")
+    // Instanciate regexp/functions
+    var matches = [];
+    var replacements = [];
+    for (var i=0; i<options.matchesTypes.length; i++) {
+        if (options.matchesTypes[i] === "string")
+            matches[i] = options.matchesAsStrings[i];
+        else if (options.matchesTypes[i] === "regexp")
+            matches[i] = new RegExp(options.matchesAsStrings[i]);
+
+        if (options.replacementsTypes[i] === "string")
+            replacements[i] = options.replacementsAsStrings[i];
+        else if (options.replacementsTypes[i] === "function")
+            replacements[i] = new Function('node', 'match', options.replacementsAsStrings[i]);
+    }
+
     if (! matches) // undefined == false ; [] == false
         return;
 

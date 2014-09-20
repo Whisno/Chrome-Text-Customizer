@@ -79,7 +79,6 @@ function saveOptions() {
         replacementsTypes: replacementsTypes,
         replacementsAsStrings: replacements
     }, function() {
-        chrome.runtime.sendMessage({cmd: "reloadRules"});
         anyValueModified = false;
         loadOptions();
     });
