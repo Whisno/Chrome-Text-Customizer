@@ -49,11 +49,20 @@ h1 {
         padding: 0 50px;
 
         select {
-            margin-bottom: 5px;
+            margin: 0 5px 15px 0;
+        }
+
+        .regexp_options {
+            display: inline-block;
+                
+            label + label {
+                margin-left: 15px;
+            }
         }
 
         textarea {
             width: 100%;
+            max-width: 100%;
         }
     }
 

@@ -37,8 +37,12 @@ h1 {
   .rule .match, .rule .replacement {
     width: 50%;
     padding: 0 50px; }
+    .rule .match .regexp_options, .rule .replacement .regexp_options {
+      display: inline-block; }
+      .rule .match .regexp_options label + label, .rule .replacement .regexp_options label + label {
+        margin-left: 15px; }
     .rule .match select, .rule .replacement select {
-      margin-bottom: 5px; }
+      margin: 0 15px 5px 0; }
     .rule .match textarea, .rule .replacement textarea {
       width: 100%; }
   .rule .match {
