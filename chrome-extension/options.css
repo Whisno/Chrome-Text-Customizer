@@ -19,6 +19,15 @@ h1 {
   position: relative;
   clear: both;
   text-align: left; }
+  .glyphicon-arrow-right {
+    font-size: 3em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -0.5em;
+    margin-left: -0.5em;
+    color: #f3f3f3;
+    z-index: -1; }
   .rule .delete_line {
     position: absolute;
     top: 0;

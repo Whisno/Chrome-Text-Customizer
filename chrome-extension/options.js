@@ -9,6 +9,7 @@ var $line = $("\
         </select><br/>\
         <textarea class='match_value' placeholder='Match'></textarea>\
     </div>\
+    <span class='glyphicon glyphicon-arrow-right'></span>\
     <div class='replacement'>\
         <select class='replacement_type'>\
             <option name='string' selected='selected'>string</option>\
@@ -21,9 +22,6 @@ var $line = $("\
 
 document.addEventListener('DOMContentLoaded', function() {
     // Event handlers on static content
-    $('input, select').change(function() {
-        anyValueModified = true;
-    });
     $('#btn_save').click(function() {
         saveOptions();
     });
@@ -34,6 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
         appendLine();
     });
     // Event handlers on dynamic content
+    $('body').on('change', 'input, select, textarea', function() {
+        anyValueModified = true;
+    });
+    $('body').on('change', '.rule select', function() {
+        $(this).nextAll("textarea")[0].focus();
+    });
     $('body').on('focus', '#rules textarea', function() {
         var $this = $(this);
         $this.select();

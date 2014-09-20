@@ -32,6 +32,17 @@ h1 {
         border: none;
         background: none;
     }
+    
+    .glyphicon-arrow-right {
+        font-size: 3em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -0.5em;
+        margin-left: -0.5em;
+        color: #f3f3f3;
+        z-index: -1;
+    }
 
     .match, .replacement {
         width: 50%;
