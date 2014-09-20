@@ -21,4 +21,4 @@ Thanks to these people for inspiration and code examples :
 
 
 
-**Feedback and pull requests highly appreciated !**
+##Feedback and pull requests highly appreciated !

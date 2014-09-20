@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+    padding: 0 15%;
+}
+
+#rules {
+    width: 100%;
+}
+
+#rules textarea {
+    width: 90%;
+    height: 2em;
+}
