@@ -15,10 +15,7 @@ Thanks to these people for inspiration and code examples :
 - https://github.com/stuartpb/s-keyboard-leopard-g
 - http://stackoverflow.com/a/4060635
 - http://stackoverflow.com/a/15710692
-- http://code.google.com/p/ireader-extension/
 
 
-
-
-
-##Feedback and pull requests highly appreciated !
+<br/>
+<p align='center'><b>Feedbacks and pull requests highly appreciated !</b></p>

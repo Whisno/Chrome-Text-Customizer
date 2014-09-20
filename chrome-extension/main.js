@@ -15,7 +15,7 @@ chrome.runtime.sendMessage({cmd: "getRules"}, function(response) {
 
     var CTC_DOMCharacterDataModified_handled = false; // Avoid infinite loops
     document.body.addEventListener ("DOMCharacterDataModified", function(e) {
-        if (!CTC_DOMCharacterDataModified_handled) {
+        if (! CTC_DOMCharacterDataModified_handled) {
             findAndReplace(e.target, matches, replacements);
             CTC_DOMCharacterDataModified_handled = true;
         } else {
