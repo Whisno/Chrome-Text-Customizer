@@ -22,9 +22,8 @@ h1 {
   .glyphicon-arrow-right {
     font-size: 3em;
     position: absolute;
+    top: 0.6em;
     left: 50%;
-    top: 50%;
-    margin-top: -0.5em;
     margin-left: -0.5em;
     color: #f3f3f3;
     z-index: -1; }
@@ -44,11 +43,13 @@ h1 {
     .rule .match select, .rule .replacement select {
       margin: 0 15px 5px 0; }
     .rule .match textarea, .rule .replacement textarea {
-      width: 100%; }
+      width: 100%;
+      max-width: 100%; }
   .rule .match {
     float: left; }
   .rule .replacement {
     float: right; }
 
 #add_line {
-  margin: 1em 0 2.5em 0; }
+  margin: 1em 0 2.5em 0;
+  font-weight: bold; }

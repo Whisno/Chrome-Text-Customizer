@@ -1,9 +1,4 @@
 function findAndReplace(element, patterns, replacements) {   
-    if (patterns.length !== replacements.length) {
-        console.error("[Chrome Text Customizer] : matches and replacements are not of the same length.");
-        return;
-    }
-    
     for (var child_i = 0; child_i < element.childNodes.length; child_i++) {
         var child = element.childNodes[child_i];
         // Recursively explore element nodes
@@ -17,7 +12,7 @@ function findAndReplace(element, patterns, replacements) {
                 var pattern = patterns[replacement_i];
                 var replacement = replacements[replacement_i];
                 var matches = [];
-                
+
                 // If replacement is a string, simply use replace() on child.nodeValue
                 if (typeof replacement === 'string') {
                     if (typeof pattern === 'string')

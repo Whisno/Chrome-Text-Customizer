@@ -49,7 +49,7 @@ function parseRules(matches, replacements) {
             ret_replacements[i] = replacements[i].string;
         }
         else if (replacements[i].type === "function") {
-            ret_replacements[i] = new Function('node', 'match', replacements[i]);
+            ret_replacements[i] = new Function('node', 'match', replacements[i].string);
         }
     }
     return {

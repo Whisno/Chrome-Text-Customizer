@@ -36,9 +36,8 @@ h1 {
     .glyphicon-arrow-right {
         font-size: 3em;
         position: absolute;
+        top: 2em;
         left: 50%;
-        top: 50%;
-        margin-top: -0.5em;
         margin-left: -0.5em;
         color: #f3f3f3;
         z-index: -1;
@@ -61,6 +60,7 @@ h1 {
         }
 
         textarea {
+            min-height: 2em;
             width: 100%;
             max-width: 100%;
         }
@@ -77,4 +77,5 @@ h1 {
 
 #add_line {
     margin: 1em 0 2.5em 0;
+    font-weight: bold;
 }

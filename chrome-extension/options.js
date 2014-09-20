@@ -4,7 +4,7 @@ var $line = $("\
     <button class='delete_line'><span class='glyphicon glyphicon-remove'></span></button>\
     <div class='match'>\
         <select class='type match_type'>\
-            <option value='string' selected='selected'>String</option>\
+            <option value='string' selected='selected'>Text</option>\
             <option value='regexp'>RegExp</option>\
         </select>\
         <div class='regexp_options'>\
@@ -17,8 +17,8 @@ var $line = $("\
     <span class='glyphicon glyphicon-arrow-right'></span>\
     <div class='replacement'>\
         <select class='type replacement_type'>\
-            <option value='string' selected='selected'>String</option>\
-            <option name='function'>Function</option>\
+            <option value='string' selected='selected'>Text</option>\
+            <option value='function'>Function</option>\
         </select><br/>\
         <textarea class='value replacement_value' placeholder='Replace'></textarea>\
     </div>\
@@ -145,7 +145,6 @@ function appendLine(match, replacement) {
     if (match !== undefined) {
         $new_line.find('.match_type').val(match.type);
         $new_line.find('.match_value').val(match.string);
-        debugger;
         if (match.type === "regexp") {
             if (match.options.indexOf('g') !== -1)
                 $new_line.find('#regexp_options_g').prop('checked', true);
