@@ -1,13 +1,41 @@
 body {
-    text-align: center;
-    padding: 0 15%;
-}
+  text-align: center; }
+
+.clearer {
+  clear: both; }
+
+h1 {
+  margin-bottom: 1.3em; }
+
+.alert {
+  width: 50%;
+  margin: auto; }
 
 #rules {
-    width: 100%;
-}
+  margin-top: 1em; }
 
-#rules textarea {
-    width: 90%;
-    height: 2em;
-}
+.rule {
+  margin: 20px 10px;
+  position: relative;
+  clear: both;
+  text-align: left; }
+  .rule .delete_line {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background: none; }
+  .rule .match, .rule .replacement {
+    width: 50%;
+    padding: 0 50px; }
+    .rule .match select, .rule .replacement select {
+      margin-bottom: 5px; }
+    .rule .match textarea, .rule .replacement textarea {
+      width: 100%; }
+  .rule .match {
+    float: left; }
+  .rule .replacement {
+    float: right; }
+
+#add_line {
+  margin: 1em 0 2.5em 0; }

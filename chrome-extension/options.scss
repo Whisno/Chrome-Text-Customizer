@@ -1,0 +1,60 @@
+body {
+    text-align: center;
+}
+
+.clearer {
+    clear: both;
+}
+
+h1 {
+    margin-bottom: 1.3em;
+}
+
+.alert {
+    width: 50%;
+    margin: auto;
+}
+
+#rules {
+    margin-top: 1em;
+}
+
+.rule {
+    margin: 20px 10px;
+    position: relative;
+    clear: both;
+    text-align: left;
+
+    .delete_line {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: none;
+        background: none;
+    }
+
+    .match, .replacement {
+        width: 50%;
+        padding: 0 50px;
+
+        select {
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+        }
+    }
+
+    .match {
+        float: left;
+    }
+
+    .replacement {
+        float: right;
+    }
+}
+
+#add_line {
+    margin: 1em 0 2.5em 0;
+}

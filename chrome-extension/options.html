@@ -6,6 +6,7 @@
 	<link rel="shortcut icon" type="image/png" href="assets/icon24.png"/>
 	<script type="text/javascript" src="assets/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="options.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="options.css">
 </head>
 <body>
@@ -13,16 +14,15 @@
 		Chrome Text Customizer Options
 	</h1>
 
-	<table id="rules">
-		<thead><tr><td></td><td>Matches</td><td>Replacements</td></tr></thead>
-		<tbody></tbody>
-	</table>
+	<div id="notifications"></div>
+
+	<div id="rules"></div>
 	
 	<div id="control" class="control">
-		<button id="add_line">New Rule</button>
-		<br/><br/>
-		<button id="btnSave">Save</button>
-		<button id="btnClose">Close</button>
+		<button id="add_line" class="btn btn-default">New Rule</button>
+		<br/>
+		<button id="btn_save" class="btn btn-primary">Save</button>
+		<button id="btn_close" class="btn btn-default">Close</button>
 	</div>
 </div>
 </body>

@@ -1,15 +1,33 @@
 var anyValueModified = false;
-var $line = $("<tr><td><button class='delete_line'>X</button></td><td class='match'><select class='match_type'><option name='string' selected='selected'>string</option><option name='regexp'>regexp</option></select><textarea class='match_value'></textarea></td><td class='replacement'><select class='replacement_type'><option name='string' selected='selected'>string</option><option name='function'>function</option></select><textarea class='replacement_value'></textarea></td></tr>");
+var $line = $("\
+<div class='rule'>\
+    <button class='delete_line'><span class='glyphicon glyphicon-remove'></span></button>\
+    <div class='match'>\
+        <select class='match_type'>\
+            <option name='string' selected='selected'>string</option>\
+            <option name='regexp'>regexp</option>\
+        </select><br/>\
+        <textarea class='match_value' placeholder='Match'></textarea>\
+    </div>\
+    <div class='replacement'>\
+        <select class='replacement_type'>\
+            <option name='string' selected='selected'>string</option>\
+            <option name='function'>function</option>\
+        </select><br/>\
+        <textarea class='replacement_value' placeholder='Replace'></textarea>\
+    </div>\
+    <div class='clearer'></div>\
+</div>");
 
 document.addEventListener('DOMContentLoaded', function() {
     // Event handlers on static content
     $('input, select').change(function() {
         anyValueModified = true;
     });
-    $('#btnSave').click(function() {
+    $('#btn_save').click(function() {
         saveOptions();
     });
-    $('#btnClose').click(function() {
+    $('#btn_close').click(function() {
         closeWindow();
     });
     $('#add_line').click(function() {
@@ -17,11 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     // Event handlers on dynamic content
     $('body').on('focus', '#rules textarea', function() {
-        $(this).select();
+        var $this = $(this);
+        $this.select();
+        $this.mouseup(function() {
+            $this.unbind("mouseup");
+            return false;
+        });
     });
     $('body').on('click', '.delete_line', function() {
-        $(this).closest('tr').remove();
-        if ($("#rules tbody tr").length === 0)
+        $(this).closest('.rule').remove();
+        if ($("#rules .rule").length === 0)
             appendLine();
     });
 
@@ -36,7 +59,7 @@ function loadOptions() {
         replacementsTypes: [],
         replacementsAsStrings: []
     }, function(options) {
-        var $table = $('#rules tbody');
+        var $table = $('#rules');
         $table.empty();
 
         for (var i=0; i<options.matchesTypes.length; i++) {
@@ -56,7 +79,7 @@ function saveOptions() {
     var matches = [];
     var replacementsTypes = [];
     var replacements = [];
-    var $lines = $('#rules tbody tr');
+    var $lines = $('#rules .rule');
 
     $lines.each(function(i) {
         var matchType = $(this).find('.match_type').val();
@@ -79,6 +102,8 @@ function saveOptions() {
         replacementsTypes: replacementsTypes,
         replacementsAsStrings: replacements
     }, function() {
+        $("#notifications").append("<div class='alert alert-success' style='display: none;'>Rules saved !</div>");
+        $("#notifications .alert").slideDown(300).delay(1000).slideUp(300, function() { $(this).remove() });
         anyValueModified = false;
         loadOptions();
     });
@@ -113,7 +138,7 @@ function appendLine(match_type, match_value, replacement_type, replacement_value
                 $new_line.find('.replacement_value').val(replacement_value.toString());
         }
     }
-    $('#rules tbody').append($new_line);
+    $('#rules').append($new_line);
 }
 
 function validateRule(matchType, match, replacementType, replacement) {
