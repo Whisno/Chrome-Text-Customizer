@@ -18,31 +18,46 @@ h1 {
   margin: 20px 10px;
   position: relative;
   clear: both;
-  text-align: left; }
-  .glyphicon-arrow-right {
-    font-size: 3em;
-    position: absolute;
-    top: 0.6em;
-    left: 50%;
-    margin-left: -0.5em;
-    color: #f3f3f3;
-    z-index: -1; }
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 5px; }
+  .rule.invalid {
+    transition: background-color 4s, border-color 4s;
+    background-color: #f2dede;
+    border-color: #ebccd1; }
+    .rule.invalid .glyphicon-arrow-right {
+      transition: color 4s;
+      color: #ebccd1; }
   .rule .delete_line {
     position: absolute;
     top: 0;
     right: 0;
     border: none;
     background: none; }
+  .rule .glyphicon-arrow-right {
+    font-size: 3em;
+    position: absolute;
+    top: 0.6em;
+    left: 50%;
+    margin-left: -0.5em;
+    color: #f3f3f3; }
   .rule .match, .rule .replacement {
     width: 50%;
     padding: 0 50px; }
-    .rule .match .regexp_options, .rule .replacement .regexp_options {
-      display: inline-block; }
-      .rule .match .regexp_options label + label, .rule .replacement .regexp_options label + label {
-        margin-left: 15px; }
     .rule .match select, .rule .replacement select {
       margin: 0 15px 5px 0; }
+    .rule .match .options, .rule .replacement .options {
+      display: inline-block; }
+      .rule .match .options label + label, .rule .match .options .tooltip + label, .rule .replacement .options label + label, .rule .replacement .options .tooltip + label {
+        margin-left: 15px; }
+    .rule .match .btn_help, .rule .replacement .btn_help {
+      font-size: 12px;
+      line-height: 20px;
+      float: right;
+      cursor: pointer;
+      color: #aaa; }
     .rule .match textarea, .rule .replacement textarea {
+      min-height: 2em;
       width: 100%;
       max-width: 100%; }
   .rule .match {
@@ -50,6 +65,7 @@ h1 {
   .rule .replacement {
     float: right; }
 
-#add_line {
-  margin: 1em 0 2.5em 0;
-  font-weight: bold; }
+#controls {
+  margin-top: 2.5em; }
+  #controls #add_line {
+    font-weight: bold; }

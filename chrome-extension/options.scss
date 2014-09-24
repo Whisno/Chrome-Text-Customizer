@@ -1,5 +1,5 @@
 body {
-    text-align: center;
+    text-align: center
 }
 
 .clearer {
@@ -24,6 +24,19 @@ h1 {
     position: relative;
     clear: both;
     text-align: left;
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    &.invalid {
+        transition: background-color 4s, border-color 4s;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+
+        .glyphicon-arrow-right {
+            transition: color 4s;
+            color: #ebccd1;
+        }
+    }
 
     .delete_line {
         position: absolute;
@@ -36,11 +49,10 @@ h1 {
     .glyphicon-arrow-right {
         font-size: 3em;
         position: absolute;
-        top: 2em;
+        top: 0.6em;
         left: 50%;
         margin-left: -0.5em;
         color: #f3f3f3;
-        z-index: -1;
     }
 
     .match, .replacement {
@@ -48,15 +60,23 @@ h1 {
         padding: 0 50px;
 
         select {
-            margin: 0 5px 15px 0;
+            margin: 0 15px 5px 0;
         }
 
-        .regexp_options {
+        .options {
             display: inline-block;
                 
-            label + label {
+            label + label, .tooltip + label {
                 margin-left: 15px;
             }
+        }
+
+        .btn_help {
+            font-size: 12px;
+            line-height: 20px;
+            float: right;
+            cursor: pointer;
+            color: #aaa;
         }
 
         textarea {
@@ -75,7 +95,10 @@ h1 {
     }
 }
 
-#add_line {
-    margin: 1em 0 2.5em 0;
-    font-weight: bold;
+#controls {
+    margin-top: 2.5em;
+
+    #add_line {
+        font-weight: bold;
+    }
 }

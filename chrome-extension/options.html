@@ -4,12 +4,40 @@
 	<title>Chrome Text Customizer Options</title>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" type="image/png" href="assets/icon24.png"/>
-	<script type="text/javascript" src="assets/jquery-2.1.1.min.js"></script>
+	<script src="assets/js/jquery-2.1.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	<script type="text/javascript" src="options.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="options.css">
 </head>
 <body>
+	<div class="modal fade" id="modal_help_regexp">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	                <h4 class="modal-title">Help</h4>
+	            </div>
+	            <div class="modal-body">
+	                <p>Halp !  Me newb !</p>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="modal fade" id="modal_help_function">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	                <h4 class="modal-title">Help</h4>
+	            </div>
+	            <div class="modal-body">
+	                <p>Halp !  Me newb !</p>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
 	<h1>
 		Chrome Text Customizer Options
 	</h1>
@@ -18,11 +46,9 @@
 
 	<div id="rules"></div>
 	
-	<div id="control" class="control">
-		<button id="add_line" class="btn btn-default">Add a rule</button>
-		<br/>
-		<button id="btn_save" class="btn btn-primary">Save</button>
-		<button id="btn_close" class="btn btn-default">Close</button>
+	<div id="controls">
+		<button id="add_line" class="btn btn-default"><span class='glyphicon glyphicon-plus'></span> Add a rule</button>
+		<button id="btn_save" class="btn btn-primary"><span class='glyphicon glyphicon-ok'></span> Save</button>
 	</div>
 </div>
 </body>
