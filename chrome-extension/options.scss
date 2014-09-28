@@ -20,7 +20,8 @@ h1 {
 }
 
 .rule {
-    margin: 20px 10px;
+    margin: 1px 10px;
+    padding: 10px 0;
     position: relative;
     clear: both;
     text-align: left;
@@ -49,7 +50,7 @@ h1 {
     .glyphicon-arrow-right {
         font-size: 3em;
         position: absolute;
-        top: 0.6em;
+        top: 0.8em;
         left: 50%;
         margin-left: -0.5em;
         color: #f3f3f3;

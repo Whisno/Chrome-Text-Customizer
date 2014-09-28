@@ -135,12 +135,12 @@ function saveOptions() {
                 matchOptions = (reg_g?'g':'')+(reg_i?'i':'')+(reg_m?'m':'');
             }
             // String replacement options
-            if (matchType === "string") {
+            if (replacementType === "string") {
                 var text_p = $line.find("#text_rep_options_p").is(':checked');
-                matchOptions = (text_p?'p':'');
+                replacementOptions = (text_p?'p':'');
             }
             // Function options
-            if (matchType === "function") {}
+            if (replacementType === "function") {}
 
             var match = {
                 string: matchStr,
@@ -173,7 +173,7 @@ function saveOptions() {
             loadOptions();
         });
     } else {
-        showNotification("Oops ! There's something wrong with highlighted rules.","danger", 3000);
+        showNotification("Oops ! There's something wrong with highlighted rules.","danger", 5000);
     }
 }
 
@@ -182,24 +182,22 @@ function appendLine(match, replacement) {
     if (match !== undefined) {
         $new_line.find('.match_type').val(match.type);
         $new_line.find('.match_value').val(match.string);
+        if (match.type === "string") {
+            $new_line.find('#text_match_options_i').prop('checked', match.options.indexOf('i') !== -1);
+            $new_line.find('#text_match_options_w').prop('checked', match.options.indexOf('w') !== -1);
+        }
         if (match.type === "regexp") {
-            if (match.options.indexOf('g') !== -1)
-                $new_line.find('#regexp_options_g').prop('checked', true);
-            else
-                $new_line.find('#regexp_options_g').prop('checked', false);
-            if (match.options.indexOf('i') !== -1)
-                $new_line.find('#regexp_options_i').prop('checked', true);
-            else
-                $new_line.find('#regexp_options_i').prop('checked', false);
-            if (match.options.indexOf('m') !== -1)
-                $new_line.find('#regexp_options_m').prop('checked', true);
-            else
-                $new_line.find('#regexp_options_m').prop('checked', false);
+            $new_line.find('#regexp_options_g').prop('checked', match.options.indexOf('g') !== -1);
+            $new_line.find('#regexp_options_i').prop('checked', match.options.indexOf('i') !== -1);
+            $new_line.find('#regexp_options_m').prop('checked', match.options.indexOf('m') !== -1);
         }
     }
     if (replacement !== undefined) {
         $new_line.find('.replacement_type').val(replacement.type);
         $new_line.find('.replacement_value').val(replacement.string);
+        if (replacement.type === "string") {
+            $new_line.find('#text_rep_options_p').prop('checked', replacement.options.indexOf('p') !== -1);
+        }
     }
     $('#rules').append($new_line);
     $new_line.find(".has_tooltip").tooltip({html: true});
