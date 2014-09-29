@@ -17,8 +17,8 @@ var $line = $("\
                 G <input checked='checked' type='checkbox' id='regexp_options_g' name='regexp_options_g' /></label>\
             <label class='has_tooltip' title='<b>Case Insensitive</b> : overlook charachters case (ex. A = a)' for='regexp_options_i'>\
                 I <input type='checkbox' id='regexp_options_i' name='regexp_options_i' /></label>\
-            <label class='has_tooltip' title='<b>Multiline</b> : use ^ to match the begining of a line and $ to match the end of a line.' for='regexp_options_m'>\
-                M <input type='checkbox' id='regexp_options_m' name='regexp_options_m' /></label>\
+            <!--<label class='has_tooltip' title='<b>Multiline</b> : use ^ to match the begining of a line and $ to match the end of a line.' for='regexp_options_m'>\
+                M <input type='checkbox' id='regexp_options_m' name='regexp_options_m' /></label>-->\
         </div>\
         <span data-toggle='modal' data-target='#modal_help_regexp' class='btn_help glyphicon glyphicon-question-sign'></span>\
         <br/>\

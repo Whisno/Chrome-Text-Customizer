@@ -47,7 +47,7 @@ function parseRules(matches, replacements) {
         if (matches[i].type === "string") {
             var string = matches[i].string;
             if (matches[i].options.indexOf('w') !== -1)
-                string = '\b'+string+'\b';
+                string = '\\b'+string+'\\b';
             var options = 'g' + matches[i].options.indexOf('i') !== -1 ? 'i' : '';
             ret_matches.push(new RegExp(string, options));
         }
@@ -57,10 +57,8 @@ function parseRules(matches, replacements) {
 
         // Replacement
         if (replacements[i].type === "string") {
-            if (replacements[i].options.indexOf('p') !== -1)
-                ret_replacements.push(replaceSubstringPreserveCase.bind(this, replacements[i].string));
-            else
-                ret_replacements.push(replaceSubstring.bind(this, replacements[i].string));
+            var preserve_case = replacements[i].options.indexOf('p') !== -1;
+            ret_replacements.push(replaceSubstring.bind(this, replacements[i].string, preserve_case));
         }
         else if (replacements[i].type === "function") {
             ret_replacements.push(new Function('node', 'match', replacements[i].string));
@@ -74,21 +72,16 @@ function parseRules(matches, replacements) {
 
 // Following functions are used as templates to create replacement functions through currying
 
-function replaceSubstring(replacement_str, node, match) {
+function replaceSubstring(replacement_str, preserve_case, node, match) {
+    if (preserve_case) {
+        replacement_str = replacement_str.toLowerCase();
+        if (match[0] === match[0].toUpperCase())
+            replacement_str = replacement_str.toUpperCase();
+        if (match[0][0] === match[0][0].toUpperCase())
+            replacement_str = replacement_str[0].toUpperCase() + replacement_str.substr(1);
+    }
     var text_node = document.createTextNode(replacement_str);
-    node.splitText(match.index+match[0].length);
-    var match_node = node.splitText(match.index);
-    node.parentNode.replaceChild(text_node, match_node);
-}
-
-function replaceSubstringPreserveCase(replacement_str, node, match) {
-    replacement_str = replacement_str.toLowerCase();
-    if (match[0] === match[0].toUpperCase())
-        replacement_str = replacement_str.toUpperCase();
-    if (match[0][0] === match[0][0].toUpperCase())
-        replacement_str[0] = replacement_str[0].toUpperCase();
-    var text_node = document.createTextNode(replacement_str);
-    node.splitText(match.index+match[0].length);
+    node.splitText(match.index + match[0].length);
     var match_node = node.splitText(match.index);
     node.parentNode.replaceChild(text_node, match_node);
 }
