@@ -1,6 +1,6 @@
 # Chrome Text Customizer
 
-Google Chrome extension that runs through webpages, applying your find and replace rules. You can define rules in the extension's options page. They simply consist in :
+Google Chrome extension that runs through webpages when they are loaded, applying your find and replace rules. You can define rules in the extension's options page. They simply consist in :
 
   - Match : either a string or a regular expression
   - Replacement : either a string or a function that receives arguments (node, match), where 'node' is the DOM node in which there was a match and 'match' the result array (as returned by RegExp.prototype.exec())

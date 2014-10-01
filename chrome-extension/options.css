@@ -4,6 +4,9 @@ body {
 .clearer {
   clear: both; }
 
+.modal {
+  text-align: left; }
+
 h1 {
   margin-bottom: 1.3em; }
 

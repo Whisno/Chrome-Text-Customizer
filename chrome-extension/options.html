@@ -16,10 +16,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Help</h4>
+                    <h4 class="modal-title">About regular expressions</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Halp !  Me newb !</p>
+                    <p>A regular expression (abbreviated regexp) is a sequence of characters that forms a search pattern. It is a very powerful tool (altough sometimes a little tricky) to logically define how to match series of characters.</p>
+                    <p>If you want to learn how to use regexp, you can go through <a href="http://www.rexegg.com/">this tutorial</a>. If you just want a quick syntax reference, here is a <a href="https://www.debuggex.com/cheatsheet/regex/javascript">cheat sheet</a>. And finally, you can live test your regular expressions with <a href="http://regex101.com/">this tool</a>.</p>
+                    <p>Note : because of the nature of wep pages, the ^ and $ boundaries (used to match beginning and end of a string / line) will not work as expected. They will match beginning and end of text nodes, which might not look like logical text blocks.</p>
                 </div>
             </div>
         </div>
@@ -29,10 +31,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Help</h4>
+                    <h4 class="modal-title">About replacement functions</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Halp !  Me newb !</p>
+                    <p>The replacement function will be executed for each match. This function receives two arguments : 'node', the DOM node in which there was a match, and 'match', the result array as returned by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec">RegExp.prototype.exec()</a>.</p>
+                    <p>So match[0] is the matched strings, match.index is the start position of the matched string in the text node's content and match[n] is the n<sup>th</sup> parenthesized substring matche (if defined).</p>
+                    <p>For example, here is a function that wraps the match in a 'em' tag.</p>
+<code>var wrap = document.createElement('em');
+node.splitText(match.index+match[0].length);
+wrap.appendChild(node.splitText(match.index));
+node.parentNode.insertBefore(wrap, node.nextSibling);</code>
                 </div>
             </div>
         </div>
