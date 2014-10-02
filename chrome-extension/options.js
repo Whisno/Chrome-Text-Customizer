@@ -7,18 +7,16 @@ var $line = $("\
             <option value='regexp'>RegExp</option>\
         </select>\
         <div class='options string_options'>\
-            <label class='has_tooltip' title='<b>Case Insensitive</b> : overlook charachters case (ex. A = a)' for='text_match_options_i'>\
+            <label class='has_tooltip text_match_options_i' title='<b>Case Insensitive</b> : overlook charachters case (ex. A = a)' for='text_match_options_i'>\
                 I <input checked='checked' type='checkbox' id='text_match_options_i' name='text_match_options_i' /></label>\
-            <label class='has_tooltip' title='<b>Whole Word</b> : only match single words (words surrounded by white characters or punctuation)' for='text_match_options_w'>\
+            <label class='has_tooltip text_match_options_w' title='<b>Whole Word</b> : only match single words (words surrounded by white characters or punctuation)' for='text_match_options_w'>\
                 W <input checked='checked' type='checkbox' id='text_match_options_w' name='text_match_options_w' /></label>\
         </div>\
         <div class='options regexp_options'>\
-            <label class='has_tooltip' title='<b>Global</b> : A global regexp will match all patterns in a given string whereas a non-global pattern will stop after the first match' for='regexp_options_g'>\
+            <label class='has_tooltip regexp_options_g' title='<b>Global</b> : A global regexp will match all patterns in a given string whereas a non-global pattern will stop after the first match' for='regexp_options_g'>\
                 G <input checked='checked' type='checkbox' id='regexp_options_g' name='regexp_options_g' /></label>\
-            <label class='has_tooltip' title='<b>Case Insensitive</b> : overlook charachters case (ex. A = a)' for='regexp_options_i'>\
+            <label class='has_tooltip regexp_options_i' title='<b>Case Insensitive</b> : overlook charachters case (ex. A = a)' for='regexp_options_i'>\
                 I <input type='checkbox' id='regexp_options_i' name='regexp_options_i' /></label>\
-            <!--<label class='has_tooltip' title='<b>Multiline</b> : use ^ to match the begining of a line and $ to match the end of a line.' for='regexp_options_m'>\
-                M <input type='checkbox' id='regexp_options_m' name='regexp_options_m' /></label>-->\
         </div>\
         <span data-toggle='modal' data-target='#modal_help_regexp' class='btn_help glyphicon glyphicon-question-sign'></span>\
         <br/>\
@@ -31,8 +29,10 @@ var $line = $("\
             <option value='function'>Function</option>\
         </select>\
         <div class='options string_options'>\
-            <label class='has_tooltip' title='<b>Preserve case</b> : Apply the capitalization of the match to the replacement (first letter capitalized / all lowercase / all uppercase)' for='text_rep_options_p'>\
+            <label class='has_tooltip text_rep_options_p' title='<b>Preserve case</b> : Apply the capitalization of the match to the replacement (first letter capitalized, all lowercase or all uppercase)' for='text_rep_options_p'>\
                 P <input checked='checked' type='checkbox' id='text_rep_options_p' name='text_rep_options_p' /></label>\
+            <label class='has_tooltip text_rep_options_g' title='<b>Use captured groups</b> : In a regexp, you can use capturing parentheses to extract a part of a match that you can then reuse (eg. \\1 will insert the first captured group).' for='text_rep_options_g'>\
+                G <input type='checkbox' id='text_rep_options_g' name='text_rep_options_g' /></label>\
         </div>\
         <div class='options function_options'></div>\
         <span data-toggle='modal' data-target='#modal_help_function' class='btn_help glyphicon glyphicon-question-sign'></span>\
@@ -94,7 +94,8 @@ function loadOptions() {
         for (var i=0; i<options.matches.length; i++) {
             var match = options.matches[i];
             var replacement = options.replacements[i];
-            appendLine(match, replacement)
+            processRuleOnLoad(match, replacement);
+            appendLine(match, replacement);
         }
         if (options.matches.length === 0)
             appendLine();
@@ -131,13 +132,13 @@ function saveOptions() {
             if (matchType === "regexp") {
                 var reg_g = $line.find("#regexp_options_g").is(':checked');
                 var reg_i = $line.find("#regexp_options_i").is(':checked');
-                var reg_m = $line.find("#regexp_options_m").is(':checked');
-                matchOptions = (reg_g?'g':'')+(reg_i?'i':'')+(reg_m?'m':'');
+                matchOptions = (reg_g?'g':'')+(reg_i?'i':'');
             }
             // String replacement options
             if (replacementType === "string") {
                 var text_p = $line.find("#text_rep_options_p").is(':checked');
-                replacementOptions = (text_p?'p':'');
+                var text_g = $line.find("#text_rep_options_g").is(':checked');
+                replacementOptions = (text_p?'p':'')+(text_g?'g':'');
             }
             // Function options
             if (replacementType === "function") {}
@@ -164,6 +165,8 @@ function saveOptions() {
         });
     }
     if (all_rules_valid) {
+        for (var i=0; i<matches.length; i++)
+            processRuleOnSave(matches[i], replacements[i]);
         chrome.storage.sync.set({
             matches: matches,
             replacements: replacements
@@ -175,6 +178,24 @@ function saveOptions() {
     } else {
         showNotification("Oops ! There's something wrong with highlighted rules.","danger", 5000);
     }
+}
+
+// Preprocess as much as possible to reduce the work that will be done on each page rendering
+// Unfortunately this is limited by the fact that chrome.storage cannot store objects, functions, regexps or dates
+function processRuleOnSave(match, replacement) {
+    if (match.type === "string")
+        match.string = match.string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    if (match.options.indexOf('w') !== -1)
+        match.string = '\\b'+match.string+'\\b';
+}
+
+// Undo the processing that was done on save
+function processRuleOnLoad(match, replacement) {
+    if (match.options.indexOf('w') !== -1)
+        if (/^\\b/.test(match.string) && /\\b$/.test(match.string))
+            match.string = match.string.substr(2, match.string.length-4);
+    if (match.type === "string")
+        match.string = match.string.replace(/\\([-\/\\^$*+?.()|[\]{}])/g, '$1');
 }
 
 function appendLine(match, replacement) {
@@ -189,7 +210,6 @@ function appendLine(match, replacement) {
         if (match.type === "regexp") {
             $new_line.find('#regexp_options_g').prop('checked', match.options.indexOf('g') !== -1);
             $new_line.find('#regexp_options_i').prop('checked', match.options.indexOf('i') !== -1);
-            $new_line.find('#regexp_options_m').prop('checked', match.options.indexOf('m') !== -1);
         }
     }
     if (replacement !== undefined) {
@@ -197,6 +217,9 @@ function appendLine(match, replacement) {
         $new_line.find('.replacement_value').val(replacement.string);
         if (replacement.type === "string") {
             $new_line.find('#text_rep_options_p').prop('checked', replacement.options.indexOf('p') !== -1);
+            if (match.type === "regexp") {
+                $new_line.find('#text_rep_options_g').prop('checked', replacement.options.indexOf('g') !== -1);
+            }
         }
     }
     $('#rules').append($new_line);
@@ -210,10 +233,13 @@ function matchTypeChanged($rule) {
         $rule.find(".match .string_options").css("display", "none");
         $rule.find(".match .regexp_options").css("display", "inline-block");
         $rule.find("span[data-target='#modal_help_regexp']").show();
+        $rule.find(".replacement .string_options .text_rep_options_g").css("display", "inline");
     } else {
         $rule.find(".match .string_options").css("display", "inline-block");
         $rule.find(".match .regexp_options").css("display", "none");
         $rule.find("span[data-target='#modal_help_regexp']").hide();
+        $rule.find(".replacement .string_options .text_rep_options_g").prop("checked", false);
+        $rule.find(".replacement .string_options .text_rep_options_g").css("display", "none");
     }
 }
 

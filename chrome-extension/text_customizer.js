@@ -45,11 +45,8 @@ function parseRules(matches, replacements) {
 
         // Match
         if (matches[i].type === "string") {
-            var string = matches[i].string;
-            if (matches[i].options.indexOf('w') !== -1)
-                string = '\\b'+string+'\\b';
             var options = 'g' + matches[i].options.indexOf('i') !== -1 ? 'i' : '';
-            ret_matches.push(new RegExp(string, options));
+            ret_matches.push(new RegExp(matches[i].string, options));
         }
         else if (matches[i].type === "regexp") {
             ret_matches.push(new RegExp(matches[i].string, matches[i].options));
@@ -58,7 +55,8 @@ function parseRules(matches, replacements) {
         // Replacement
         if (replacements[i].type === "string") {
             var preserve_case = replacements[i].options.indexOf('p') !== -1;
-            ret_replacements.push(replaceSubstring.bind(this, replacements[i].string, preserve_case));
+            var replace_captured_groups = replacements[i].options.indexOf('g') !== -1;
+            ret_replacements.push(replaceSubstring.bind(this, replacements[i].string, preserve_case, replace_captured_groups));
         }
         else if (replacements[i].type === "function") {
             ret_replacements.push(new Function('node', 'match', replacements[i].string));
@@ -72,7 +70,15 @@ function parseRules(matches, replacements) {
 
 // Following functions are used as templates to create replacement functions through currying
 
-function replaceSubstring(replacement_str, preserve_case, node, match) {
+function replaceSubstring(replacement_str, preserve_case, replace_captured_groups, node, match) {
+    if (replace_captured_groups) {
+        var i = 1;
+        var rep_str_match = null;
+        while ((rep_str_match = new RegExp("\\\\"+i).exec(replacement_str)) !== null && match[i] !== undefined) {
+            replacement_str = replacement_str.substr(0, rep_str_match.index) + match[i] + replacement_str.substr(rep_str_match.index + rep_str_match[0].length);
+            i++;
+        }
+    }
     if (preserve_case) {
         replacement_str = replacement_str.toLowerCase();
         if (match[0] === match[0].toUpperCase())
@@ -84,11 +90,4 @@ function replaceSubstring(replacement_str, preserve_case, node, match) {
     node.splitText(match.index + match[0].length);
     var match_node = node.splitText(match.index);
     node.parentNode.replaceChild(text_node, match_node);
-}
-
-function wrapInTag(tag_str, node, match) {
-    var wrap = document.createElement(tag_str);
-    node.splitText(match.index+match[0].length);
-    wrap.appendChild(node.splitText(match.index));
-    node.parentNode.insertBefore(wrap, node.nextSibling);
 }
