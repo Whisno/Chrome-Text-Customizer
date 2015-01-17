@@ -7,7 +7,7 @@ var $line = $("\
             <option value='regexp'>RegExp</option>\
         </select>\
         <div class='options string_options'>\
-            <label class='has_tooltip text_match_options_i' title='<b>Case Insensitive</b> : overlook charachters case (ex. A = a)' for='text_match_options_i'>\
+            <label class='has_tooltip text_match_options_i' title='<b>Case Insensitive</b> : overlook characters case (ex. A = a)' for='text_match_options_i'>\
                 I <input checked='checked' type='checkbox' id='text_match_options_i' name='text_match_options_i' /></label>\
             <label class='has_tooltip text_match_options_w' title='<b>Whole Word</b> : only match single words (words surrounded by white characters or punctuation)' for='text_match_options_w'>\
                 W <input checked='checked' type='checkbox' id='text_match_options_w' name='text_match_options_w' /></label>\
@@ -15,7 +15,7 @@ var $line = $("\
         <div class='options regexp_options'>\
             <label class='has_tooltip regexp_options_g' title='<b>Global</b> : A global regexp will match all patterns in a given string whereas a non-global pattern will stop after the first match' for='regexp_options_g'>\
                 G <input checked='checked' type='checkbox' id='regexp_options_g' name='regexp_options_g' /></label>\
-            <label class='has_tooltip regexp_options_i' title='<b>Case Insensitive</b> : overlook charachters case (ex. A = a)' for='regexp_options_i'>\
+            <label class='has_tooltip regexp_options_i' title='<b>Case Insensitive</b> : overlook characters case (ex. A = a)' for='regexp_options_i'>\
                 I <input type='checkbox' id='regexp_options_i' name='regexp_options_i' /></label>\
         </div>\
         <span data-toggle='modal' data-target='#modal_help_regexp' class='btn_help glyphicon glyphicon-question-sign'></span>\
