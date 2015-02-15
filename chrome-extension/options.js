@@ -42,7 +42,14 @@ var $line = $("\
     <div class='clearer'></div>\
 </div>");
 
+// Should be used to offer the possibility to save upon window closing
 var anyValueModified = false;
+
+// Unfortunately, this handler seems too hard-wired to the browser to permit custom behaviour
+// https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
+$(window).on("beforeunload", function() {
+    if (anyValueModified) return "Data you have entered may not be saved, do you really want to leave ?";
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Event handlers on static content
