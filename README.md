@@ -8,10 +8,6 @@ Google Chrome extension that runs through webpages when they are loaded, applyin
 So you can simply find/replace strings ('keyboard' -> 'leopard' for instance) or take it to another level and use custom functions to apply CSS to substrings, move them through the DOM and so forth.
 
 
-## Credit
+## Known issues
 
-Thanks to these people for inspiration and code examples :
-
-- https://github.com/stuartpb/s-keyboard-leopard-g
-- http://stackoverflow.com/a/4060635
-- http://stackoverflow.com/a/15710692
+- Whole-word replacements don't work with words containing non-ASCII characters, thanks to javascript regexp \b implementation. This is a little tricky to fix since this implementation also doesn't support lookbehind, so at best we can match (non-word character, word, non-word character) and receive from the regexp (non-word character, word). This would require to wrap replacement functions in a function that cleanse the regexp match parameter. Or maybe adapt the regexp : http://stackoverflow.com/a/7376612
